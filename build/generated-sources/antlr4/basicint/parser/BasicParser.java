@@ -1,4 +1,4 @@
-// Generated from C:\Users\junin\Documents\NetBeansProjects\InterTradutor\grammar\basicint\parser\Basic.g4 by ANTLR 4.6
+// Generated from /home/a120077/Área de Trabalho/InterpreTraduto/grammar/basicint/parser/Basic.g4 by ANTLR 4.6
 
 package basicint.parser;
 import basicint.util.*;
