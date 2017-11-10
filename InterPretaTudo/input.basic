@@ -7,18 +7,18 @@ read z;
 media = (x+y+z)/3;
 print "Media:";
 print media;
-if (media >= 7)
+if (media >= 7) then
 {
     print "Passou";
 } 
 else 
 {    
-    if (media >= 4){
+    if (media >= 4) then {
         print "Exame";
         print "Informe a nota do exame:";
         read exame;
         total = (media + exame) / 2;
-        if (total >=5) {
+        if (total >=5) then {
             print "Aprovado com exame";
         } else {
             print "Reprovado com exame";

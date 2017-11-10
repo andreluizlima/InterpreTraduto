@@ -1,4 +1,4 @@
-// Generated from /home/a120077/BasicIntAST/grammar/basicintast/parser/Basic.g4 by ANTLR 4.6
+// Generated from /home/a120077/Área de Trabalho/InterPretaTudo/grammar/basicintast/parser/Basic.g4 by ANTLR 4.6
 
 package basicintast.parser;
 import basicintast.util.*;

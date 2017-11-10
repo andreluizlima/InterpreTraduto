@@ -18,8 +18,8 @@ stmt    : print EOL             #stmtPrint
         | cond                  #stmtCond
         ;
 
-cond    : IF '('condExpr')' b1=block                   #ifStmt
-        | IF '('condExpr')' b1=block ELSE b2=block     #ifElseStmt 
+cond    : IF '('condExpr')' THEN  b1=block                   #ifStmt
+        | IF '('condExpr')' THEN  b1=block ELSE b2=block     #ifElseStmt 
         ;
 
 condExpr: expr                                              #condExpresion
@@ -54,9 +54,40 @@ expr2   : '(' expr ')'      #expr2Par
         | VAR               #expr2Var
         ;
 
+fragment A:('a'|'A');
+fragment B:('b'|'B');
+fragment C:('c'|'C');
+fragment D:('d'|'D');
+fragment E:('e'|'E');
+fragment F:('f'|'F');
+fragment G:('g'|'G');
+fragment H:('h'|'H');
+fragment I:('i'|'I');
+fragment J:('j'|'J');
+fragment K:('k'|'K');
+fragment L:('l'|'L');
+fragment M:('m'|'M');
+fragment N:('n'|'N');
+fragment O:('o'|'O');
+fragment P:('p'|'P');
+fragment Q:('q'|'Q');
+fragment R:('r'|'R');
+fragment S:('s'|'S');
+fragment T:('t'|'T');
+fragment U:('u'|'U');
+fragment V:('v'|'V');
+fragment W:('w'|'W');
+fragment X:('x'|'X');
+fragment Y:('y'|'Y');
+fragment Z:('z'|'Z');
+
+
 //TOKENS
-IF      : 'if';
-ELSE    : 'else';
+IF      : I F ;
+BEGIN   : B E G I N ;
+END     : E N D ;
+ELSE    : E L S E;
+THEN    : T H E N ;
 GT      : '>' ;
 LT      : '<' ;
 EQ      : '==';
@@ -73,8 +104,8 @@ OPEN_BL : '{' ;
 CLOSE_BL: '}' ;
 IS      : '=' ;
 EOL     : ';' ;
-PRINT   : 'print' ;
-READ    : 'read' ;
+PRINT   : P R I N T ;
+READ    : R E A D ;
 NUM     : [0-9]+ ;
 VAR     : [a-zA-Z][a-zA-Z0-9_]*;
 STR     : '"' ('\\' ["\\] | ~["\\\r\n])* '"';
