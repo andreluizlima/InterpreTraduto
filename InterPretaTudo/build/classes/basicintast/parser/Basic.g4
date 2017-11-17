@@ -1,6 +1,3 @@
-/******************************************************
- * A multi-line Javadoc-like comment about my grammar *
- ******************************************************/
 grammar Basic;
 
 @header{
@@ -8,11 +5,28 @@ package basicintast.parser;
 import basicintast.util.*;
 }
 
-program : (stmt)+               #programStmt
+program : PROGRAM STR EOL var? procedure?        #programStmtBegin
+        | PROGRAM STR EOL start                       #programStmt
+        ;
+var     : VAR varnames ':' type EOL  var
+        | start
+        ;
+type    : INT
+        | FLOAT
+        | BOOLEAN
+        ;
+varnames    : VARNAME ',' varnames
+            | VARNAME
+            ;
+
+procedure   :
+            ;
+
+start   : BEGIN (stmt)* ENDP
         ;
 
-stmt    : print EOL             #stmtPrint
-        | read  EOL             #stmtRead
+stmt    : write EOL             #stmtPrint
+        | readln  EOL             #stmtRead
         | attr  EOL             #stmtAttr
         | expr  EOL             #stmtExpr
         | cond                  #stmtCond
@@ -29,11 +43,11 @@ condExpr: expr                                              #condExpresion
 block   : '{' program '}'   #blockStmt
         ;
 
-print   : PRINT STR         #printStr
-        | PRINT expr        #printExpr
+write   : WRITE STR         #printStr
+        | WRITE expr        #printExpr
         ;
 
-read    : READ VAR          #readVar
+readln    : READLN VAR          #readVar
         ;
 
 attr    : VAR '=' expr      #attrExpr
@@ -86,8 +100,22 @@ fragment Z:('z'|'Z');
 IF      : I F ;
 BEGIN   : B E G I N ;
 END     : E N D ;
-ELSE    : E L S E;
+ENDP    : E N D '.' ;
+ELSE    : E L S E ;
 THEN    : T H E N ;
+WRITE   : W R I T E ;
+WRITELN : W R I T E L N ;
+READLN  : R E A D L N ;
+INT     : I N T E G E R ;
+FLOAT   : F L O A T ;
+BOOLEAN : B O O L E A N ;
+STRING  : S T R I N G ;
+FOR     : F O R ;
+WHILE   : W H I L E ;
+ARRAY   : A R R A Y ;
+VAR     : V A R ;
+PROGRAM : P R O G R A M ;
+
 GT      : '>' ;
 LT      : '<' ;
 EQ      : '==';
@@ -104,9 +132,7 @@ OPEN_BL : '{' ;
 CLOSE_BL: '}' ;
 IS      : '=' ;
 EOL     : ';' ;
-PRINT   : P R I N T ;
-READ    : R E A D ;
 NUM     : [0-9]+ ;
-VAR     : [a-zA-Z][a-zA-Z0-9_]*;
+VARNAME     : [a-zA-Z][a-zA-Z0-9_]*;
 STR     : '"' ('\\' ["\\] | ~["\\\r\n])* '"';
 WS      : [\n\r \t]+ -> skip;

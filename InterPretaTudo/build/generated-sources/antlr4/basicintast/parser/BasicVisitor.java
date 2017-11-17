@@ -1,4 +1,4 @@
-// Generated from /home/a120077/Área de Trabalho/InterPretaTudo/grammar/basicintast/parser/Basic.g4 by ANTLR 4.6
+// Generated from C:\Users\a120106\Desktop\InterpreTraduto-master\InterPretaTudo\grammar\basicintast\parser\Basic.g4 by ANTLR 4.6
 
 package basicintast.parser;
 import basicintast.util.*;
@@ -14,12 +14,49 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface BasicVisitor<T> extends ParseTreeVisitor<T> {
 	/**
+	 * Visit a parse tree produced by the {@code programStmtBegin}
+	 * labeled alternative in {@link BasicParser#program}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitProgramStmtBegin(BasicParser.ProgramStmtBeginContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code programStmt}
 	 * labeled alternative in {@link BasicParser#program}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitProgramStmt(BasicParser.ProgramStmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link BasicParser#var}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVar(BasicParser.VarContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link BasicParser#type}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitType(BasicParser.TypeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link BasicParser#varnames}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVarnames(BasicParser.VarnamesContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link BasicParser#procedure}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitProcedure(BasicParser.ProcedureContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link BasicParser#start}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStart(BasicParser.StartContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code stmtPrint}
 	 * labeled alternative in {@link BasicParser#stmt}.
@@ -92,21 +129,21 @@ public interface BasicVisitor<T> extends ParseTreeVisitor<T> {
 	T visitBlockStmt(BasicParser.BlockStmtContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code printStr}
-	 * labeled alternative in {@link BasicParser#print}.
+	 * labeled alternative in {@link BasicParser#write}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitPrintStr(BasicParser.PrintStrContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code printExpr}
-	 * labeled alternative in {@link BasicParser#print}.
+	 * labeled alternative in {@link BasicParser#write}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitPrintExpr(BasicParser.PrintExprContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code readVar}
-	 * labeled alternative in {@link BasicParser#read}.
+	 * labeled alternative in {@link BasicParser#readln}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
