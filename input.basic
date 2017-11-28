@@ -1,6 +1,13 @@
-x=2+2;
-print x;
-y=10;
-print x+y;
-read z;
-print z;
+program "test";
+var
+    x, ww: integer;
+
+
+begin
+write "Informe x";
+
+readln ww;
+write x;
+
+
+end. 
