@@ -1,9 +1,12 @@
 program "test";
 var
-    x: integer;
+    x, ww: integer;
+
+
 begin
 write "Informe x";
-readln x;
+
+readln ww;
 write x;
 
 

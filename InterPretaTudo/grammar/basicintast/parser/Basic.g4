@@ -8,17 +8,19 @@ import basicintast.util.*;
 program : PROGRAM STR EOL var? procedure?        #programStmtBegin
         | PROGRAM STR EOL start                       #programStmt
         ;
-var     : VAR varnames ':' type EOL  var
+var     : VAR varnames ':' type EOL  var 
         | start
         ;
 type    : INT
         | FLOAT
         | BOOLEAN
         ;
-varnames    : VARNAME ',' varnames
-            | VARNAME
+varnames    : varname ',' varnames  
+            | varname               
             ;
 
+varname     : VARNAME   #varName
+            ;
 procedure   :
             ;
 
@@ -26,7 +28,7 @@ start   : BEGIN (stmt)+ ENDP
         ;
 
 stmt    : write EOL             #stmtPrint
-        | readln  EOL             #stmtRead
+        | readln  EOL           #stmtRead
         | attr  EOL             #stmtAttr
         | expr  EOL             #stmtExpr
         | cond                  #stmtCond

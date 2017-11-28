@@ -86,8 +86,14 @@ public class BasicVisitorImpl extends BasicBaseVisitor<Object> {
     public Object visitReadVar(BasicParser.ReadVarContext ctx) {
         Scanner s = new Scanner(System.in);
         Object value = s.next();
-        SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), value);
-        return value;
+        
+        if((SymbolsTable.getInstance().getSymbol(ctx.VARNAME().getText()))!=null){
+            SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), value);
+            return value;
+        }
+        System.out.println("Variável não declarada!");
+        
+        return null;
     }
 
     @Override
@@ -149,5 +155,15 @@ public class BasicVisitorImpl extends BasicBaseVisitor<Object> {
     public Object visitExpr2Var(BasicParser.Expr2VarContext ctx) {
         return SymbolsTable.getInstance().getSymbol(ctx.VARNAME().getText());
     }
+    @Override 
+    public Object visitVarName(BasicParser.VarNameContext ctx) {
+        SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), null);
+        return visitChildren(ctx); 
+    }      
+    @Override 
+    public Object visitVarr(BasicParser.VarNameContext ctx) {
+        visit(ctx.);
+    }    
+
 
 }

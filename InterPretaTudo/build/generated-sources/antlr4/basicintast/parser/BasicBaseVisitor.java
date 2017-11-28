@@ -1,4 +1,4 @@
-// Generated from C:\Users\junin\Documents\InterPretaTudo_Esse\grammar\basicintast\parser\Basic.g4 by ANTLR 4.6
+// Generated from /home/a120106/Área de Trabalho/Comp/InterpreTraduto/InterPretaTudo/grammar/basicintast/parser/Basic.g4 by ANTLR 4.6
 
 package basicintast.parser;
 import basicintast.util.*;
@@ -49,6 +49,13 @@ public class BasicBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitVarnames(BasicParser.VarnamesContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitVarName(BasicParser.VarNameContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
