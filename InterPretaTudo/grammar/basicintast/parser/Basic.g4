@@ -36,6 +36,7 @@ cond    : IF '('condExpr')' THEN  b1=block                   #ifStmt
         | IF '('condExpr')' THEN  b1=block ELSE b2=block     #ifElseStmt 
         ;
 
+
 condExpr: expr                                              #condExpresion
         | expr relop=('>'|'<'|'=='|'>='|'<='|'!=') expr     #condRelOp
         ;
@@ -47,10 +48,10 @@ write   : WRITE STR         #printStr
         | WRITE expr        #printExpr
         ;
 
-readln    : READLN VAR          #readVar
+readln    : READLN VARNAME          #readVar
         ;
 
-attr    : VAR '=' expr      #attrExpr
+attr    : VARNAME '=' expr      #attrExpr
         ;
 
 expr    : expr1 '+' expr    #exprPlus
@@ -65,7 +66,7 @@ expr1   : expr2 '*' expr    #expr1Mult
 
 expr2   : '(' expr ')'      #expr2Par
         | NUM               #expr2Num
-        | VAR               #expr2Var
+        | VARNAME               #expr2Var
         ;
 
 fragment A:('a'|'A');

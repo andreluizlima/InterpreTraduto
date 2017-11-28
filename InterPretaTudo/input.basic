@@ -2,4 +2,9 @@ program "test";
 var
     x: integer;
 begin
+write "Informe x";
+readln x;
+write x;
+
+
 end. 

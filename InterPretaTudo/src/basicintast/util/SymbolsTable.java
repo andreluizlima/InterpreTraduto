@@ -13,7 +13,7 @@ import java.util.HashMap;
  */
 public class SymbolsTable {
     
-    private HashMap<String, Double> symbols;
+    private HashMap<String, Object> symbols;
     
     protected SymbolsTable(){
         symbols = new HashMap<>();
@@ -27,11 +27,11 @@ public class SymbolsTable {
         return INSTANCE;
     }
     
-    public void addSymbol(String symbol, Double value){
+    public void addSymbol(String symbol, Object value){
         symbols.put(symbol, value);
     }
     
-    public Double getSymbol(String symbol){
+    public Object getSymbol(String symbol){
         if (symbols.containsKey(symbol)){
             return symbols.get(symbol);
         }

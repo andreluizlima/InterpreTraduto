@@ -85,15 +85,15 @@ public class BasicVisitorImpl extends BasicBaseVisitor<Object> {
     @Override
     public Object visitReadVar(BasicParser.ReadVarContext ctx) {
         Scanner s = new Scanner(System.in);
-        Double value = s.nextDouble();
-        SymbolsTable.getInstance().addSymbol(ctx.VAR().getText(), value);
+        Object value = s.next();
+        SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), value);
         return value;
     }
 
     @Override
     public Object visitAttrExpr(BasicParser.AttrExprContext ctx) {
-        Double value = (Double) visit(ctx.expr());
-        SymbolsTable.getInstance().addSymbol(ctx.VAR().getText(), value);
+        Object value = (Object) visit(ctx.expr());
+        SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), value);
         return value;
     }
 
@@ -147,7 +147,7 @@ public class BasicVisitorImpl extends BasicBaseVisitor<Object> {
 
     @Override
     public Object visitExpr2Var(BasicParser.Expr2VarContext ctx) {
-        return SymbolsTable.getInstance().getSymbol(ctx.VAR().getText());
+        return SymbolsTable.getInstance().getSymbol(ctx.VARNAME().getText());
     }
 
 }
