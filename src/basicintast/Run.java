@@ -21,7 +21,7 @@ public class Run {
         ParseTree tree = parser.program();
 
         BasicVisitor eval = new BasicVisitorImpl();
-        eval.visit(tree);
+        eval.visit(tree);             
     }
 
 }

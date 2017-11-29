@@ -1,4 +1,4 @@
-// Generated from /home/a120106/Área de Trabalho/Comp/InterpreTraduto/InterPretaTudo/grammar/basicintast/parser/Basic.g4 by ANTLR 4.6
+// Generated from /home/andre/Área de Trabalho/Trabalho/InterpreTraduto/grammar/basicintast/parser/Basic.g4 by ANTLR 4.6
 
 package basicintast.parser;
 import basicintast.util.*;
@@ -34,24 +34,32 @@ public interface BasicVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVar(BasicParser.VarContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code varNameFirst}
+	 * labeled alternative in {@link BasicParser#var2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVarNameFirst(BasicParser.VarNameFirstContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code startL}
+	 * labeled alternative in {@link BasicParser#var2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStartL(BasicParser.StartLContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code varName}
+	 * labeled alternative in {@link BasicParser#varn}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVarName(BasicParser.VarNameContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link BasicParser#type}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitType(BasicParser.TypeContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link BasicParser#varnames}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitVarnames(BasicParser.VarnamesContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code varName}
-	 * labeled alternative in {@link BasicParser#varname}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitVarName(BasicParser.VarNameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link BasicParser#procedure}.
 	 * @param ctx the parse tree

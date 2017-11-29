@@ -84,36 +84,38 @@ public class BasicVisitorImpl extends BasicBaseVisitor<Object> {
 
     @Override
     public Object visitReadVar(BasicParser.ReadVarContext ctx) {
-        Scanner s = new Scanner(System.in);
-        Object value = s.next();
-        
-        if((SymbolsTable.getInstance().getSymbol(ctx.VARNAME().getText()))!=null){
-            SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), value);
+
+        if ((SymbolsTable.getInstance().getSymbol(ctx.VARNAME().getText())) != null) {
+            Scanner s = new Scanner(System.in);
+            Object value = s.next();
+            String type = SymbolsTable.getInstance().getType(ctx.VARNAME().getText());
+            SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, value);
             return value;
         }
         System.out.println("Variável não declarada!");
-        
+
         return null;
     }
 
     @Override
     public Object visitAttrExpr(BasicParser.AttrExprContext ctx) {
         Object value = (Object) visit(ctx.expr());
-        SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), value);
+        String type = SymbolsTable.getInstance().getType(ctx.VARNAME().getText());
+        SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, value);
         return value;
     }
 
     @Override
     public Object visitExprPlus(BasicParser.ExprPlusContext ctx) {
-        Double a = (Double) visit(ctx.expr1());
-        Double b = (Double) visit(ctx.expr());
+        Double a = Double.parseDouble((String)visit(ctx.expr1()));
+        Double b = Double.parseDouble((String)visit(ctx.expr()));
         return a + b;
     }
 
     @Override
     public Object visitExprMinus(BasicParser.ExprMinusContext ctx) {
-        Double a = (Double) visit(ctx.expr1());
-        Double b = (Double) visit(ctx.expr());
+        Double a = Double.parseDouble((String)visit(ctx.expr1()));
+        Double b = Double.parseDouble((String)visit(ctx.expr()));
         return a - b;
     }
 
@@ -124,16 +126,20 @@ public class BasicVisitorImpl extends BasicBaseVisitor<Object> {
 
     @Override
     public Object visitExpr1Mult(BasicParser.Expr1MultContext ctx) {
-        Double a = (Double) visit(ctx.expr2());
-        Double b = (Double) visit(ctx.expr());
-        return a * b;
+        Object a = visit(ctx.expr2());
+        Object b = visit(ctx.expr());
+        Double aa = Double.parseDouble((String)a);
+        Double bb = Double.parseDouble((String)b);
+        return aa * bb;
     }
 
     @Override
     public Object visitExpr1Div(BasicParser.Expr1DivContext ctx) {
-        Double a = (Double) visit(ctx.expr2());
-        Double b = (Double) visit(ctx.expr());
-        return a / b;
+        Object a = visit(ctx.expr2());
+        Object b = visit(ctx.expr());
+        Double aa = Double.parseDouble((String)a);
+        Double bb = Double.parseDouble((String)b);
+        return aa / bb;
     }
 
     @Override
@@ -148,22 +154,29 @@ public class BasicVisitorImpl extends BasicBaseVisitor<Object> {
 
     @Override
     public Object visitExpr2Num(BasicParser.Expr2NumContext ctx) {
-        return Double.parseDouble(ctx.NUM().getText());
+        return ctx.NUM().getText();
     }
 
     @Override
     public Object visitExpr2Var(BasicParser.Expr2VarContext ctx) {
-        return SymbolsTable.getInstance().getSymbol(ctx.VARNAME().getText());
+        return SymbolsTable.getInstance().getValue(ctx.VARNAME().getText());
     }
-    @Override 
-    public Object visitVarName(BasicParser.VarNameContext ctx) {
-        SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), null);
-        return visitChildren(ctx); 
-    }      
-    @Override 
-    public Object visitVarr(BasicParser.VarNameContext ctx) {
-        visit(ctx.);
-    }    
 
+    @Override
+    public Object visitVarNameFirst(BasicParser.VarNameFirstContext ctx) {
+
+        String type = ctx.type().getText();
+        SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, null);
+
+        return visitChildren(ctx);
+    }
+
+    @Override
+    public Object visitVarName(BasicParser.VarNameContext ctx) {
+        String type = ctx.parent.getChild(4).getText();
+        SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, null);
+
+        return visitChildren(ctx);
+    }
 
 }

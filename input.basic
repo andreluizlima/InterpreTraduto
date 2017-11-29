@@ -1,13 +1,24 @@
 program "test";
 var
-    x, ww: integer;
-
+    x, y, z: integer;
+    nome: string;
 
 begin
-write "Informe x";
 
-readln ww;
-write x;
+write "Informe x";
+readln x;
+write "Informe y";
+readln y;
+z = x-y;
+write z;
+z = x+8;
+write z;
+z = x*3;
+write z;
+z = x/5;
+write z;
+
+
 
 
 end. 
