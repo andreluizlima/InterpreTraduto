@@ -9,15 +9,20 @@ write "Informe x";
 readln x;
 write "Informe y";
 readln y;
-z = x-y;
+z := x-y;
 write z;
-z = x+8;
+z := x+y;
 write z;
-z = x*3;
+z := x*y;
 write z;
-z = x/5;
+z := x/y;
 write z;
 
+
+write "Escreva um nome: ";
+readln nome;
+nome := "Andre";
+write nome;
 
 
 

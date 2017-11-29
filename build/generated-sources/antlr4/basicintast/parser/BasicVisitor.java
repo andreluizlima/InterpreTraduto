@@ -171,6 +171,13 @@ public interface BasicVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAttrExpr(BasicParser.AttrExprContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code attrString}
+	 * labeled alternative in {@link BasicParser#attr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAttrString(BasicParser.AttrStringContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code exprPlus}
 	 * labeled alternative in {@link BasicParser#expr}.
 	 * @param ctx the parse tree

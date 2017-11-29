@@ -51,7 +51,8 @@ write   : WRITE STR         #printStr
 readln    : READLN VARNAME          #readVar
         ;
 
-attr    : VARNAME '=' expr      #attrExpr
+attr    : VARNAME ':=' expr         #attrExpr
+        | VARNAME ':=' STR       #attrString      
         ;
 
 expr    : expr1 '+' expr    #exprPlus

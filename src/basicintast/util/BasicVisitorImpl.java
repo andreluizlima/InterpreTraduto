@@ -71,6 +71,8 @@ public class BasicVisitorImpl extends BasicBaseVisitor<Object> {
     @Override
     public Object visitPrintStr(BasicParser.PrintStrContext ctx) {
         String val = ctx.STR().getText();
+        char c = '\0';
+        val = val.replace('"', c);
         System.out.println(val);
         return 0d;
     }
@@ -89,6 +91,9 @@ public class BasicVisitorImpl extends BasicBaseVisitor<Object> {
             Scanner s = new Scanner(System.in);
             Object value = s.next();
             String type = SymbolsTable.getInstance().getType(ctx.VARNAME().getText());
+            /////////////////
+            System.out.println("valor: "+value+"tipo: "+type);
+            /////////////////
             SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, value);
             return value;
         }
@@ -101,6 +106,15 @@ public class BasicVisitorImpl extends BasicBaseVisitor<Object> {
     public Object visitAttrExpr(BasicParser.AttrExprContext ctx) {
         Object value = (Object) visit(ctx.expr());
         String type = SymbolsTable.getInstance().getType(ctx.VARNAME().getText());
+        System.out.println("valor: "+value+"tipo: "+type);
+        SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, value);
+        return value;
+    }
+    @Override
+    public Object visitAttrString(BasicParser.AttrStringContext ctx) {
+        Object value = ctx.STR().getText();
+        String type = SymbolsTable.getInstance().getType(ctx.VARNAME().getText());
+        System.out.println("valor: "+value+"tipo: "+type);
         SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, value);
         return value;
     }
