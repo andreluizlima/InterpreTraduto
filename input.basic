@@ -9,8 +9,12 @@ begin
 write "teste if";
 write 2*2+2;
 write 2*(1+2*2);
-if((1+1)==2) then
+funciona := true;
+
+if(funciona) then
     write "Entrou";
+else
+    write "Não entrou";
 end;
 
 write "W: ";

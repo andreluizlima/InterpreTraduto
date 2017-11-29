@@ -43,10 +43,10 @@ public class BasicVisitorImpl extends BasicBaseVisitor<Object> {
 
     @Override
     public Object visitCondRelOp(BasicParser.CondRelOpContext ctx) {
-        Double a = Double.parseDouble((String)visit(ctx.expr(0)));
-        Double b = Double.parseDouble((String)visit(ctx.expr(1)));
+        Double a = Double.parseDouble((String) visit(ctx.expr(0)));
+        Double b = Double.parseDouble((String) visit(ctx.expr(1)));
         int op = ctx.relop.getType();
-        
+
         switch (op) {
             case BasicLexer.EQ:
                 return Objects.equals(a, b);
@@ -66,7 +66,7 @@ public class BasicVisitorImpl extends BasicBaseVisitor<Object> {
 
     @Override
     public Object visitCondExpresion(BasicParser.CondExpresionContext ctx) {
-        Double d = (Double) visit(ctx.expr());
+        Double d = Double.parseDouble((String) visit(ctx.expr()));
         return d > 0;
     }
 
@@ -134,8 +134,52 @@ public class BasicVisitorImpl extends BasicBaseVisitor<Object> {
     public Object visitAttrExpr(BasicParser.AttrExprContext ctx) {
         Object value = (Object) visit(ctx.expr());
         String type = SymbolsTable.getInstance().getType(ctx.VARNAME().getText());
-        SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, value);
+        switch (type) {
+            case "integer":
+                try {
+                    Integer.parseInt((String) value);
+                    SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, value);
+                } catch (Exception a) {
+                    System.out.println("Tipo incompatível!");
+                    break;
+                }
+                break;
+            case "float":
+                try {
+                    Double.parseDouble((String) value);
+                    SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, value);
+                } catch (Exception a) {
+                    System.out.println("Tipo incompatível!");
+                    break;
+                }
+                break;
+//            case "boolean":
+//                try {
+//
+//                    SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, value);
+//
+//                } catch (Exception a) {
+//                    System.out.println("Tipo incompatível!");
+//                }
+//                break;
+            default:
+                SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, value);
+                break;
+        }
+        // SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, value);
         return value;
+    }
+
+    @Override
+    public Object visitAttrBool(BasicParser.AttrBoolContext ctx) {
+        String type = SymbolsTable.getInstance().getType(ctx.VARNAME().getText());
+        Object value = ctx.getChild(2).getText();
+        if(value.equals("true")){
+            SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, "1.0");
+        }else{
+            SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, "0.0");
+        }
+        return visitChildren(ctx);
     }
 
     @Override
@@ -152,7 +196,7 @@ public class BasicVisitorImpl extends BasicBaseVisitor<Object> {
             Double a = Double.parseDouble((String) visit(ctx.expr1()));
             Double b = Double.parseDouble((String) visit(ctx.expr()));
             Double result = a + b;
-            return  result.toString();
+            return result.toString();
         } catch (Exception a) {
             System.out.println(a + "PRIMEIRO");
             System.out.println("Impossível calcular!");
@@ -168,7 +212,7 @@ public class BasicVisitorImpl extends BasicBaseVisitor<Object> {
             Double b = Double.parseDouble((String) visit(ctx.expr()));
             Double result = a - b;
             return result.toString();
-            
+
         } catch (Exception a) {
             System.out.println("Impossível calcular!");
         }
@@ -187,7 +231,7 @@ public class BasicVisitorImpl extends BasicBaseVisitor<Object> {
             Object a = visit(ctx.expr2());
             Object b = visit(ctx.expr());
             Double aa = Double.parseDouble((String) a);
-            Double bb = Double.parseDouble((String) b);            
+            Double bb = Double.parseDouble((String) b);
             Double result = aa * bb;
             return result.toString();
         } catch (Exception a) {
@@ -204,7 +248,7 @@ public class BasicVisitorImpl extends BasicBaseVisitor<Object> {
             Object a = visit(ctx.expr2());
             Object b = visit(ctx.expr());
             Double aa = Double.parseDouble((String) a);
-            Double bb = Double.parseDouble((String) b);          
+            Double bb = Double.parseDouble((String) b);
             Double result = aa / bb;
             return result.toString();
         } catch (Exception a) {

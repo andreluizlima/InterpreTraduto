@@ -53,8 +53,11 @@ readln    : READLN VARNAME          #readVar
         ;
 
 attr    : VARNAME ':=' expr         #attrExpr
-        | VARNAME ':=' STR       #attrString      
+        | VARNAME ':=' STR       #attrString  
+        | VARNAME ':=' truefalse #attrBool
         ;
+
+truefalse: TRUE | FALSE;
 
 expr    : expr1 '+' expr    #exprPlus
         | expr1 '-' expr    #exprMinus
@@ -118,6 +121,8 @@ WHILE   : W H I L E ;
 ARRAY   : A R R A Y ;
 VAR     : V A R ;
 PROGRAM : P R O G R A M ;
+TRUE    : T R U E;
+FALSE   : F A L S E;
 
 GT      : '>' ;
 LT      : '<' ;
