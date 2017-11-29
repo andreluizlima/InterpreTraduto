@@ -23,6 +23,7 @@ procedure   :
             ;
 
 start   : BEGIN (stmt)+ ENDP
+        | (stmt)+ 
         ;
 
 stmt    : write EOL             #stmtPrint
@@ -32,8 +33,8 @@ stmt    : write EOL             #stmtPrint
         | cond                  #stmtCond
         ;
 
-cond    : IF '('condExpr')' THEN  b1=block                   #ifStmt
-        | IF '('condExpr')' THEN  b1=block ELSE b2=block     #ifElseStmt 
+cond    : IF '('condExpr')' THEN  b1=block    END EOL              #ifStmt
+        | IF '('condExpr')' THEN  b1=block ELSE b2=block END  EOL  #ifElseStmt 
         ;
 
 
@@ -41,7 +42,7 @@ condExpr: expr                                              #condExpresion
         | expr relop=('>'|'<'|'=='|'>='|'<='|'!=') expr     #condRelOp
         ;
 
-block   : '{' program '}'   #blockStmt
+block   : start   #blockStmt
         ;
 
 write   : WRITE STR         #printStr
