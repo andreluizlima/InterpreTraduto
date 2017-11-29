@@ -1,9 +1,9 @@
 package basicintast;
 
-import basicintast.parser.BasicLexer;
-import basicintast.parser.BasicParser;
-import basicintast.parser.BasicVisitor;
-import basicintast.util.BasicVisitorImpl;
+import basicintast.parser.PascalzinhoLexer;
+import basicintast.parser.PascalzinhoParser;
+import basicintast.parser.PascalzinhoVisitor;
+import basicintast.util.PascalzinhoVisitorImpl;
 import java.io.IOException;
 import org.antlr.v4.runtime.ANTLRFileStream;
 import org.antlr.v4.runtime.ANTLRInputStream;
@@ -14,13 +14,13 @@ public class Run {
 
     public static void main(String[] args) throws IOException {
         ANTLRInputStream input = new ANTLRFileStream("input.basic");
-        BasicLexer lexer = new BasicLexer(input);
+        PascalzinhoLexer lexer = new PascalzinhoLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
-        BasicParser parser = new BasicParser(tokens);
+        PascalzinhoParser parser = new PascalzinhoParser(tokens);
 
         ParseTree tree = parser.program();
 
-        BasicVisitor eval = new BasicVisitorImpl();
+        PascalzinhoVisitor eval = new PascalzinhoVisitorImpl();
         eval.visit(tree);             
     }
 
