@@ -6,6 +6,7 @@ var
     aprovado: boolean;
 
 begin
+
 for i:=0 to 4 do
 begin
     write "FOR 1";
@@ -13,11 +14,12 @@ end;
 
 i:=0;
 while(i<10) do
-    begin
-        write "Repetindo ";
-        i:= i+1;
-        
-    end;
+begin
+    write "Repetindo ";
+    i:= i+1;        
+end;
+
+
 writeln "";
 writeln "Calculadora da média!!";
 
@@ -33,8 +35,8 @@ readln n4;
 media := (n1+n2+n3+n4)/4;
 writeln media;
 
-if(media > 7) then
-    writeln "Primeiro IF, aprovado true";
+if(media >= 7) then
+    writeln "";
     aprovado := true;    
 else
     aprovado := false;

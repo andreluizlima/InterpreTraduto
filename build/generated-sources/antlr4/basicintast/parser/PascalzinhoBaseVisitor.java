@@ -153,6 +153,13 @@ public class PascalzinhoBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitForStmt2(PascalzinhoParser.ForStmt2Context ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitCondExpresion(PascalzinhoParser.CondExpresionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

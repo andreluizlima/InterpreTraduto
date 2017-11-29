@@ -44,6 +44,7 @@ cond    : IF '('condExpr')' THEN  b1=block  END  EOL              #ifStmt
         | IF '('condExpr')' THEN  b1=block ELSE b2=block END EOL  #ifElseStmt
         | WHILE '('condExpr')' DO BEGIN b1=block END EOL   #whileStmt
         | FOR attr TO n=NUM DO BEGIN b1=block END EOL #forStmt
+        | FOR n=NUM TO m=NUM DO BEGIN b1=block END EOL #forStmt2
         ;
 
 
