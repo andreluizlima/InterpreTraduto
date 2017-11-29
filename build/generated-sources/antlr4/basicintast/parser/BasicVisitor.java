@@ -61,6 +61,12 @@ public interface BasicVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitType(BasicParser.TypeContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link BasicParser#arraytype}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArraytype(BasicParser.ArraytypeContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link BasicParser#procedure}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -121,6 +127,13 @@ public interface BasicVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitIfElseStmt(BasicParser.IfElseStmtContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code whileStmt}
+	 * labeled alternative in {@link BasicParser#cond}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWhileStmt(BasicParser.WhileStmtContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code condExpresion}
 	 * labeled alternative in {@link BasicParser#condExpr}.

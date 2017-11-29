@@ -1,44 +1,53 @@
 program "test";
 var
-    x, y, z: integer;
-    w: float;
+    n1, n2, n3, n4, media, exame: float;
+    i: integer;
     nome: string;
-    funciona: boolean;
+    aprovado: boolean;
 
 begin
-write "teste if";
-write 2*2+2;
-write 2*(1+2*2);
-funciona := true;
+i:=0;
+while(i<10) do
+    begin
+        write i;
+        write "Repetindo ";
+        i:= i+1;
+        
+    end;
 
-if(funciona) then
-    write "Entrou";
+write "Calculadora da média!!";
+
+write "Nota 1:";
+readln n1;
+write "Nota 2:";
+readln n2;
+write "Nota 3:";
+readln n3;
+write "Nota 4:";
+readln n4;
+
+media := (n1+n2+n3+n4)/4;
+write media;
+
+if(media > 7) then
+    write "Primeiro IF, aprovado true";
+    aprovado := true;    
 else
-    write "Não entrou";
+    aprovado := false;
+    if(media>=4) then
+        write "Nota Exame: ";
+        readln exame;
+        media := (media + exame)/2;
+        if(media>=5) then
+            aprovado := true;
+        end;
+    end;
 end;
-
-write "W: ";
-readln w;
-write "Informe x";
-readln x;
-write "Informe y";
-readln y;
-z := x-y;
-write z;
-z := x+y;
-write z;
-z := x*y;
-write z;
-z := x/y;
-write z;
-
-
-
-write "Escreva um nome: ";
-readln nome;
-nome := "Andre";
-write nome;
-
+if (aprovado) then
+    write "Aprovado";
+else
+    write "Reprovado";
+end;
 
 
 end. 

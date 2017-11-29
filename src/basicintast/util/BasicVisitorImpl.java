@@ -137,9 +137,14 @@ public class BasicVisitorImpl extends BasicBaseVisitor<Object> {
         switch (type) {
             case "integer":
                 try {
-                    Integer.parseInt((String) value);
+                    String v = value.toString();
+                    Double d = Double.parseDouble(v);
+                    Long i = d.longValue();
+                    Integer out = Integer.parseInt(i.toString());
                     SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, value);
                 } catch (Exception a) {
+
+                    System.out.println(a);
                     System.out.println("Tipo incompatível!");
                     break;
                 }
@@ -153,15 +158,6 @@ public class BasicVisitorImpl extends BasicBaseVisitor<Object> {
                     break;
                 }
                 break;
-//            case "boolean":
-//                try {
-//
-//                    SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, value);
-//
-//                } catch (Exception a) {
-//                    System.out.println("Tipo incompatível!");
-//                }
-//                break;
             default:
                 SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, value);
                 break;
@@ -174,9 +170,9 @@ public class BasicVisitorImpl extends BasicBaseVisitor<Object> {
     public Object visitAttrBool(BasicParser.AttrBoolContext ctx) {
         String type = SymbolsTable.getInstance().getType(ctx.VARNAME().getText());
         Object value = ctx.getChild(2).getText();
-        if(value.equals("true")){
+        if (value.equals("true")) {
             SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, "1.0");
-        }else{
+        } else {
             SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, "0.0");
         }
         return visitChildren(ctx);
@@ -280,8 +276,8 @@ public class BasicVisitorImpl extends BasicBaseVisitor<Object> {
 
     @Override
     public Object visitVarNameFirst(BasicParser.VarNameFirstContext ctx) {
-
         String type = ctx.type().getText();
+        System.out.println("tipo: " + type);
         SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, null);
 
         return visitChildren(ctx);
@@ -289,10 +285,45 @@ public class BasicVisitorImpl extends BasicBaseVisitor<Object> {
 
     @Override
     public Object visitVarName(BasicParser.VarNameContext ctx) {
-        String type = ctx.parent.getChild(4).getText();
+        String type = ctx.parent.getChild(3).getText();
+        boolean teste = true;
+        int i = 1;
+        while (teste) {
+            switch (type) {
+                case "integer":
+                    teste = false;
+                    break;
+                case "float":
+                    teste = false;
+                    break;
+                case "boolean":
+                    teste = false;
+                    break;
+                case "string":
+                    teste = false;
+                    break;
+                default:
+                    type = ctx.parent.getChild(3 + i).getText();
+                    i++;
+                    break;
+            }
+        }
+        System.out.println("tipo: " + type);
         SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, null);
 
         return visitChildren(ctx);
+    }
+
+    @Override
+    public Object visitWhileStmt(BasicParser.WhileStmtContext ctx) {
+        Boolean visit = true;
+        while (visit) {
+            visit(ctx.b1);
+            visit = (Boolean) visit(ctx.condExpr());
+
+        }
+        return null;
+
     }
 
 }

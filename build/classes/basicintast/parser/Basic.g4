@@ -17,9 +17,16 @@ type    : INT
         | FLOAT
         | BOOLEAN
         | STRING
+        | arraytype
         ;
 
-procedure   :
+arraytype   :   ARRAY '['NUM'..'NUM']' OF INT
+            |   ARRAY '['NUM'..'NUM']' OF FLOAT
+            |   ARRAY '['NUM'..'NUM']' OF STRING
+            |   ARRAY '['NUM'..'NUM']' OF BOOLEAN
+            ;
+
+procedure   : 
             ;
 
 start   : BEGIN (stmt)+ ENDP
@@ -33,8 +40,9 @@ stmt    : write EOL             #stmtPrint
         | cond                  #stmtCond
         ;
 
-cond    : IF '('condExpr')' THEN  b1=block    END EOL              #ifStmt
-        | IF '('condExpr')' THEN  b1=block ELSE b2=block END  EOL  #ifElseStmt 
+cond    : IF '('condExpr')' THEN  b1=block  END  EOL              #ifStmt
+        | IF '('condExpr')' THEN  b1=block ELSE b2=block END EOL  #ifElseStmt
+        | WHILE '('condExpr')' DO BEGIN b1=block END EOL   #whileStmt
         ;
 
 
@@ -42,7 +50,7 @@ condExpr: expr                                              #condExpresion
         | expr relop=('>'|'<'|'=='|'>='|'<='|'!=') expr     #condRelOp
         ;
 
-block   : start   #blockStmt
+block   : start     #blockStmt
         ;
 
 write   : WRITE STR         #printStr
@@ -120,9 +128,12 @@ FOR     : F O R ;
 WHILE   : W H I L E ;
 ARRAY   : A R R A Y ;
 VAR     : V A R ;
+PROCEDURE: P R O C E D U R E;
 PROGRAM : P R O G R A M ;
 TRUE    : T R U E;
 FALSE   : F A L S E;
+OF      : O F;
+DO      : D O;
 
 GT      : '>' ;
 LT      : '<' ;
@@ -140,7 +151,7 @@ OPEN_BL : '{' ;
 CLOSE_BL: '}' ;
 IS      : '=' ;
 EOL     : ';' ;
-NUM     : [0-9]+ ;
+NUM     : [0-9]+('.'[0-9])* ;
 VARNAME     : [a-zA-Z][a-zA-Z0-9_]*;
 STR     : '"' ('\\' ["\\] | ~["\\\r\n])* '"';
 WS      : [\n\r \t]+ -> skip;
