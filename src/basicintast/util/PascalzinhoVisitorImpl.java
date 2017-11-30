@@ -154,10 +154,7 @@ public class PascalzinhoVisitorImpl extends PascalzinhoBaseVisitor<Object> {
             switch (type) {
                 case "integer":
                     try {
-                        String v = value.toString();
-                        Double d = Double.parseDouble(v);
-                        Long i = d.longValue();
-                        Integer out = Integer.parseInt(i.toString());
+                        int i = (int) Double.parseDouble(value.toString());
                         SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, value);
                     } catch (Exception a) {
 
@@ -181,7 +178,8 @@ public class PascalzinhoVisitorImpl extends PascalzinhoBaseVisitor<Object> {
             }
             // SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, value);
             return value;
-        }System.out.println("Variável não declarada!");
+        }
+        System.out.println("Variável não declarada!");
         return null;
     }
 
@@ -199,10 +197,19 @@ public class PascalzinhoVisitorImpl extends PascalzinhoBaseVisitor<Object> {
 
     @Override
     public Object visitAttrString(PascalzinhoParser.AttrStringContext ctx) {
+
         Object value = ctx.STR().getText();
         String type = SymbolsTable.getInstance().getType(ctx.VARNAME().getText());
-        SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, value);
-        return value;
+        String v = value.toString();
+        if (v.charAt(0) == '"' && !type.equals("string")) {
+            System.out.println("Tipo incompatível!");
+            return null;
+        } else {
+            
+            SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, value);
+            return value;
+        }
+
     }
 
     @Override
@@ -358,7 +365,8 @@ public class PascalzinhoVisitorImpl extends PascalzinhoBaseVisitor<Object> {
             SymbolsTable.getInstance().addSymbol(varname, type, n);
         }
         return null;
-    }    
+    }
+
     @Override
     public Object visitForStmt2(PascalzinhoParser.ForStmt2Context ctx) {
         int n = Integer.parseInt((String) ctx.n.getText());

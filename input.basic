@@ -6,7 +6,8 @@ var
     aprovado: boolean;
 
 begin
-
+i:="ls";
+write nome;
 for i:=0 to 4 do
 begin
     write "FOR 1";
@@ -16,6 +17,7 @@ i:=0;
 while(i<10) do
 begin
     write "Repetindo ";
+    write i;
     i:= i+1;        
 end;
 
@@ -41,7 +43,9 @@ if(media >= 7) then
 else
     aprovado := false;
     if(media>=4) then
-        write "Nota Exame: ";
+     if(media>=5) then
+            aprovado := true;
+        end;   write "Nota Exame: ";
         readln exame;
         media := (media + exame)/2;
         if(media>=5) then
