@@ -22,10 +22,10 @@ import java.util.logging.Logger;
 public class Escrever {
 
     private static String file = "";
-    private static String text = "";
+    private static String text = "//Made in Brazil \n";
 
     public static void get(String texto) {
-        Escrever.text = texto;
+        Escrever.text += texto;
         gravar();
     }
 
@@ -33,23 +33,22 @@ public class Escrever {
         Escrever.file = file;
     }
 
-    public static void gravar(){
-        try{
-                    File arquivo = new File(file);
-        arquivo.delete();
-        arquivo.createNewFile();
+    public static void gravar() {
+        try {
+            File arquivo = new File(file);
+            arquivo.delete();
+            arquivo.createNewFile();
 
-        FileWriter fw = new FileWriter(arquivo, true);
-        BufferedWriter bw = new BufferedWriter(fw);
+            FileWriter fw = new FileWriter(arquivo, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(text);
 
-        bw.write(text);
+            bw.newLine();
 
-        bw.newLine();
+            bw.close();
+            fw.close();
+        } catch (Exception e) {
 
-        bw.close();
-        fw.close();
-        }catch(Exception e){
-            
         }
 
     }
