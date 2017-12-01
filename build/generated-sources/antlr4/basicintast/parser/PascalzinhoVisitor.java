@@ -1,4 +1,4 @@
-// Generated from C:\Users\junin\Documents\InterpreTraduto\grammar\basicintast\parser\Pascalzinho.g4 by ANTLR 4.6
+// Generated from /home/andre/Área de Trabalho/TEU/InterpreTraduto/grammar/basicintast/parser/Pascalzinho.g4 by ANTLR 4.6
 
 package basicintast.parser;
 import basicintast.util.*;

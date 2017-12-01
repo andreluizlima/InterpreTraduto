@@ -12,20 +12,29 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author junin
  */
 public class Escrever {
+    public static void get(String texto){
+        try {
+            texto(texto);
+        } catch (IOException ex) {
+            Logger.getLogger(Escrever.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     public static void texto(String texto) throws IOException {
-       File arquivo = new File( "nome_do_arquivo.txt" );
+       File arquivo = new File( "teste.cpp" );
+       arquivo.delete();
        arquivo.createNewFile();
     
 FileWriter fw = new FileWriter(arquivo, true);
- 
 BufferedWriter bw = new BufferedWriter(fw);
- 
+
 bw.write(texto);
  
 bw.newLine();

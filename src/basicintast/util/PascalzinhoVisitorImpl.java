@@ -132,9 +132,10 @@ public class PascalzinhoVisitorImpl extends PascalzinhoBaseVisitor<Object> {
                         System.exit(0);
                         return null;
                     }
-                    break;
+                    break;                    
                 default:
                     value = s.next();
+                    SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, value);
                     break;
             }
 
@@ -532,18 +533,4 @@ public class PascalzinhoVisitorImpl extends PascalzinhoBaseVisitor<Object> {
         }
         return null;
     }
-
-<<<<<<< HEAD
-=======
-    @Override
-    public Object visitForStmt2(PascalzinhoParser.ForStmt2Context ctx) {
-        int n = Integer.parseInt((String) ctx.n.getText());
-        int max = Integer.parseInt((String) ctx.m.getText());
-        for (int i = n; n < max; n++) {
-            visit(ctx.b1);
-        }
-        return null;
-    }
->>>>>>> 6861c651356b9845b894d31f9f8df80622583a27
-
 }

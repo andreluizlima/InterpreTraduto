@@ -13,6 +13,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 public class Run {
 
     public static void main(String[] args) throws IOException {
+        System.out.println(args[0]);
         ANTLRInputStream input = new ANTLRFileStream("input.basic");
         PascalzinhoLexer lexer = new PascalzinhoLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
