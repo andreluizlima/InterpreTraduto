@@ -20,28 +20,37 @@ import java.util.logging.Logger;
  * @author junin
  */
 public class Escrever {
-    public static void get(String texto){
-        try {
-            texto(texto);
-        } catch (IOException ex) {
-            Logger.getLogger(Escrever.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    public static void texto(String texto) throws IOException {
-       File arquivo = new File( "teste.cpp" );
-       arquivo.delete();
-       arquivo.createNewFile();
-    
-FileWriter fw = new FileWriter(arquivo, true);
-BufferedWriter bw = new BufferedWriter(fw);
 
-bw.write(texto);
- 
-bw.newLine();
- 
-bw.close();
-fw.close();
+    private static String file = "";
+    private static String text = "";
+
+    public static void get(String texto) {
+        Escrever.text = texto;
+        gravar();
+    }
+
+    public static void set(String file) {
+        Escrever.file = file;
+    }
+
+    public static void gravar(){
+        try{
+                    File arquivo = new File(file);
+        arquivo.delete();
+        arquivo.createNewFile();
+
+        FileWriter fw = new FileWriter(arquivo, true);
+        BufferedWriter bw = new BufferedWriter(fw);
+
+        bw.write(text);
+
+        bw.newLine();
+
+        bw.close();
+        fw.close();
+        }catch(Exception e){
+            
+        }
+
     }
 }
-
-
