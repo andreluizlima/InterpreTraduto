@@ -1,4 +1,4 @@
-// Generated from /home/andre/Área de Trabalho/Trabalho/InterpreTraduto/grammar/basicintast/parser/Pascalzinho.g4 by ANTLR 4.6
+// Generated from C:\Users\junin\Documents\InterpreTraduto\grammar\basicintast\parser\Pascalzinho.g4 by ANTLR 4.6
 
 package basicintast.parser;
 import basicintast.util.*;
@@ -147,13 +147,6 @@ public class PascalzinhoBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitForStmt(PascalzinhoParser.ForStmtContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitForStmt2(PascalzinhoParser.ForStmt2Context ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

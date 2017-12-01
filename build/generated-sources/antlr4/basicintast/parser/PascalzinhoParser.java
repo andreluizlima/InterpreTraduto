@@ -1,4 +1,4 @@
-// Generated from /home/andre/Área de Trabalho/Trabalho/InterpreTraduto/grammar/basicintast/parser/Pascalzinho.g4 by ANTLR 4.6
+// Generated from C:\Users\junin\Documents\InterpreTraduto\grammar\basicintast\parser\Pascalzinho.g4 by ANTLR 4.6
 
 package basicintast.parser;
 import basicintast.util.*;
@@ -98,6 +98,12 @@ public class PascalzinhoParser extends Parser {
 	@Override
 	public ATN getATN() { return _ATN; }
 
+
+	String tr ="";
+	String aux="";
+	char open=123;
+	char close=125;     
+
 	public PascalzinhoParser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
@@ -150,7 +156,7 @@ public class PascalzinhoParser extends Parser {
 		enterRule(_localctx, 0, RULE_program);
 		int _la;
 		try {
-			setState(51);
+			setState(52);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
 			case 1:
@@ -159,26 +165,27 @@ public class PascalzinhoParser extends Parser {
 				{
 				setState(38);
 				match(PROGRAM);
-				setState(39);
-				match(STR);
+				tr+="#include<iostream>\n\nusing namespace std; \n\n";
 				setState(40);
+				match(STR);
+				setState(41);
 				match(EOL);
-				setState(42);
+				setState(43);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==VAR) {
 					{
-					setState(41);
+					setState(42);
 					var();
 					}
 				}
 
-				setState(45);
+				setState(46);
 				_errHandler.sync(this);
 				switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
 				case 1:
 					{
-					setState(44);
+					setState(45);
 					procedure();
 					}
 					break;
@@ -189,13 +196,13 @@ public class PascalzinhoParser extends Parser {
 				_localctx = new ProgramStmtContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(47);
-				match(PROGRAM);
 				setState(48);
-				match(STR);
+				match(PROGRAM);
 				setState(49);
-				match(EOL);
+				match(STR);
 				setState(50);
+				match(EOL);
+				setState(51);
 				start();
 				}
 				break;
@@ -234,9 +241,9 @@ public class PascalzinhoParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(53);
-			match(VAR);
 			setState(54);
+			match(VAR);
+			setState(55);
 			var2();
 			}
 		}
@@ -274,6 +281,7 @@ public class PascalzinhoParser extends Parser {
 		}
 	}
 	public static class VarNameFirstContext extends Var2Context {
+		public Token VARNAME;
 		public TerminalNode VARNAME() { return getToken(PascalzinhoParser.VARNAME, 0); }
 		public TypeContext type() {
 			return getRuleContext(TypeContext.class,0);
@@ -301,36 +309,37 @@ public class PascalzinhoParser extends Parser {
 		enterRule(_localctx, 4, RULE_var2);
 		int _la;
 		try {
-			setState(69);
+			setState(71);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
 			case 1:
 				_localctx = new VarNameFirstContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(56);
-				match(VARNAME);
-				setState(60);
+				setState(57);
+				((VarNameFirstContext)_localctx).VARNAME = match(VARNAME);
+				aux+=(((VarNameFirstContext)_localctx).VARNAME!=null?((VarNameFirstContext)_localctx).VARNAME.getText():null);
+				setState(62);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==T__1) {
 					{
 					{
-					setState(57);
+					setState(59);
 					varn();
 					}
 					}
-					setState(62);
+					setState(64);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(63);
-				match(T__0);
-				setState(64);
-				type();
 				setState(65);
-				match(EOL);
+				match(T__0);
 				setState(66);
+				type();
+				setState(67);
+				match(EOL);
+				setState(68);
 				var2();
 				}
 				break;
@@ -338,7 +347,7 @@ public class PascalzinhoParser extends Parser {
 				_localctx = new StartLContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(68);
+				setState(70);
 				start();
 				}
 				break;
@@ -367,6 +376,7 @@ public class PascalzinhoParser extends Parser {
 		}
 	}
 	public static class VarNameContext extends VarnContext {
+		public Token VARNAME;
 		public TerminalNode VARNAME() { return getToken(PascalzinhoParser.VARNAME, 0); }
 		public VarNameContext(VarnContext ctx) { copyFrom(ctx); }
 		@Override
@@ -383,10 +393,11 @@ public class PascalzinhoParser extends Parser {
 			_localctx = new VarNameContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(71);
+			setState(73);
 			match(T__1);
-			setState(72);
-			match(VARNAME);
+			setState(74);
+			((VarNameContext)_localctx).VARNAME = match(VARNAME);
+			aux+=", "+(((VarNameContext)_localctx).VARNAME!=null?((VarNameContext)_localctx).VARNAME.getText():null);
 			}
 		}
 		catch (RecognitionException re) {
@@ -401,6 +412,7 @@ public class PascalzinhoParser extends Parser {
 	}
 
 	public static class TypeContext extends ParserRuleContext {
+		public ArraytypeContext arraytype;
 		public TerminalNode INT() { return getToken(PascalzinhoParser.INT, 0); }
 		public TerminalNode FLOAT() { return getToken(PascalzinhoParser.FLOAT, 0); }
 		public TerminalNode BOOLEAN() { return getToken(PascalzinhoParser.BOOLEAN, 0); }
@@ -423,42 +435,47 @@ public class PascalzinhoParser extends Parser {
 		TypeContext _localctx = new TypeContext(_ctx, getState());
 		enterRule(_localctx, 8, RULE_type);
 		try {
-			setState(79);
+			setState(88);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case INT:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(74);
+				setState(77);
 				match(INT);
+				tr+="int "+aux+"; \n"; aux="";
 				}
 				break;
 			case FLOAT:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(75);
+				setState(79);
 				match(FLOAT);
+				tr+="float "+aux+"; \n";aux="";
 				}
 				break;
 			case BOOLEAN:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(76);
+				setState(81);
 				match(BOOLEAN);
+				tr+="bool "+aux+"; \n";aux="";
 				}
 				break;
 			case STRING:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(77);
+				setState(83);
 				match(STRING);
+				tr+="string "+aux+"; \n";aux="";
 				}
 				break;
 			case ARRAY:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(78);
-				arraytype();
+				setState(85);
+				((TypeContext)_localctx).arraytype = arraytype();
+				tr+=((TypeContext)_localctx).arraytype.value+" "+aux+"["+((TypeContext)_localctx).arraytype.n+"];\n";
 				}
 				break;
 			default:
@@ -477,6 +494,8 @@ public class PascalzinhoParser extends Parser {
 	}
 
 	public static class ArraytypeContext extends ParserRuleContext {
+		public String value;
+		public String n;
 		public Token n1;
 		public Token n2;
 		public TerminalNode ARRAY() { return getToken(PascalzinhoParser.ARRAY, 0); }
@@ -504,91 +523,95 @@ public class PascalzinhoParser extends Parser {
 		ArraytypeContext _localctx = new ArraytypeContext(_ctx, getState());
 		enterRule(_localctx, 10, RULE_arraytype);
 		try {
-			setState(113);
+			setState(126);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(81);
+				setState(90);
 				match(ARRAY);
-				setState(82);
+				setState(91);
 				match(T__2);
-				setState(83);
+				setState(92);
 				((ArraytypeContext)_localctx).n1 = match(NUM);
-				setState(84);
+				setState(93);
 				match(T__3);
-				setState(85);
+				setState(94);
 				((ArraytypeContext)_localctx).n2 = match(NUM);
-				setState(86);
+				setState(95);
 				match(T__4);
-				setState(87);
+				setState(96);
 				match(OF);
-				setState(88);
+				setState(97);
 				match(INT);
+				((ArraytypeContext)_localctx).value =  "int "; ((ArraytypeContext)_localctx).n =  (((ArraytypeContext)_localctx).n2!=null?((ArraytypeContext)_localctx).n2.getText():null)+"-"+(((ArraytypeContext)_localctx).n1!=null?((ArraytypeContext)_localctx).n1.getText():null);
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(89);
+				setState(99);
 				match(ARRAY);
-				setState(90);
+				setState(100);
 				match(T__2);
-				setState(91);
+				setState(101);
 				((ArraytypeContext)_localctx).n1 = match(NUM);
-				setState(92);
+				setState(102);
 				match(T__3);
-				setState(93);
+				setState(103);
 				((ArraytypeContext)_localctx).n2 = match(NUM);
-				setState(94);
+				setState(104);
 				match(T__4);
-				setState(95);
+				setState(105);
 				match(OF);
-				setState(96);
+				setState(106);
 				match(FLOAT);
+				((ArraytypeContext)_localctx).value =  "float "; ((ArraytypeContext)_localctx).n =  (((ArraytypeContext)_localctx).n2!=null?((ArraytypeContext)_localctx).n2.getText():null)+"-"+(((ArraytypeContext)_localctx).n1!=null?((ArraytypeContext)_localctx).n1.getText():null);
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(97);
+				setState(108);
 				match(ARRAY);
-				setState(98);
+				setState(109);
 				match(T__2);
-				setState(99);
+				setState(110);
 				((ArraytypeContext)_localctx).n1 = match(NUM);
-				setState(100);
+				setState(111);
 				match(T__3);
-				setState(101);
+				setState(112);
 				((ArraytypeContext)_localctx).n2 = match(NUM);
-				setState(102);
+				setState(113);
 				match(T__4);
-				setState(103);
+				setState(114);
 				match(OF);
-				setState(104);
+				setState(115);
 				match(STRING);
+				((ArraytypeContext)_localctx).value =  "string "; ((ArraytypeContext)_localctx).n =  (((ArraytypeContext)_localctx).n2!=null?((ArraytypeContext)_localctx).n2.getText():null)+"-"+(((ArraytypeContext)_localctx).n1!=null?((ArraytypeContext)_localctx).n1.getText():null);
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(105);
+				setState(117);
 				match(ARRAY);
-				setState(106);
+				setState(118);
 				match(T__2);
-				setState(107);
+				setState(119);
 				((ArraytypeContext)_localctx).n1 = match(NUM);
-				setState(108);
+				setState(120);
 				match(T__3);
-				setState(109);
+				setState(121);
 				((ArraytypeContext)_localctx).n2 = match(NUM);
-				setState(110);
+				setState(122);
 				match(T__4);
-				setState(111);
+				setState(123);
 				match(OF);
-				setState(112);
+				setState(124);
 				match(BOOLEAN);
+				((ArraytypeContext)_localctx).value =  "bool "; ((ArraytypeContext)_localctx).n =  (((ArraytypeContext)_localctx).n2!=null?((ArraytypeContext)_localctx).n2.getText():null)+"-"+(((ArraytypeContext)_localctx).n1!=null?((ArraytypeContext)_localctx).n1.getText():null);
 				}
 				break;
 			}
@@ -660,30 +683,33 @@ public class PascalzinhoParser extends Parser {
 		enterRule(_localctx, 14, RULE_start);
 		int _la;
 		try {
-			setState(130);
+			setState(146);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case BEGIN:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(117);
+				setState(130);
 				match(BEGIN);
-				setState(119); 
+				tr+="\nint main()"+open+"\n";
+				setState(133); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				do {
 					{
 					{
-					setState(118);
+					setState(132);
 					stmt();
 					}
 					}
-					setState(121); 
+					setState(135); 
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << IF) | (1L << WRITE) | (1L << WRITELN) | (1L << READLN) | (1L << FOR) | (1L << WHILE) | (1L << OPEN) | (1L << NUM) | (1L << VARNAME))) != 0) );
-				setState(123);
+				setState(137);
 				match(ENDP);
+				tr+="return 0;\n"+close;
+				System.out.println(tr);
 				}
 				break;
 			case IF:
@@ -697,17 +723,17 @@ public class PascalzinhoParser extends Parser {
 			case VARNAME:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(126); 
+				setState(142); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				do {
 					{
 					{
-					setState(125);
+					setState(141);
 					stmt();
 					}
 					}
-					setState(128); 
+					setState(144); 
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << IF) | (1L << WRITE) | (1L << WRITELN) | (1L << READLN) | (1L << FOR) | (1L << WHILE) | (1L << OPEN) | (1L << NUM) | (1L << VARNAME))) != 0) );
@@ -803,16 +829,16 @@ public class PascalzinhoParser extends Parser {
 		StmtContext _localctx = new StmtContext(_ctx, getState());
 		enterRule(_localctx, 16, RULE_stmt);
 		try {
-			setState(145);
+			setState(161);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,10,_ctx) ) {
 			case 1:
 				_localctx = new StmtPrintContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(132);
+				setState(148);
 				write();
-				setState(133);
+				setState(149);
 				match(EOL);
 				}
 				break;
@@ -820,9 +846,9 @@ public class PascalzinhoParser extends Parser {
 				_localctx = new StmtReadContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(135);
+				setState(151);
 				readln();
-				setState(136);
+				setState(152);
 				match(EOL);
 				}
 				break;
@@ -830,9 +856,9 @@ public class PascalzinhoParser extends Parser {
 				_localctx = new StmtAttrContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(138);
+				setState(154);
 				attr();
-				setState(139);
+				setState(155);
 				match(EOL);
 				}
 				break;
@@ -840,9 +866,9 @@ public class PascalzinhoParser extends Parser {
 				_localctx = new StmtExprContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(141);
+				setState(157);
 				expr();
-				setState(142);
+				setState(158);
 				match(EOL);
 				}
 				break;
@@ -850,7 +876,7 @@ public class PascalzinhoParser extends Parser {
 				_localctx = new StmtCondContext(_localctx);
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(144);
+				setState(160);
 				cond();
 				}
 				break;
@@ -879,6 +905,7 @@ public class PascalzinhoParser extends Parser {
 		}
 	}
 	public static class ForStmtContext extends CondContext {
+		public AttrContext attr;
 		public Token n;
 		public BlockContext b1;
 		public TerminalNode FOR() { return getToken(PascalzinhoParser.FOR, 0); }
@@ -902,6 +929,7 @@ public class PascalzinhoParser extends Parser {
 		}
 	}
 	public static class WhileStmtContext extends CondContext {
+		public CondExprContext condExpr;
 		public BlockContext b1;
 		public TerminalNode WHILE() { return getToken(PascalzinhoParser.WHILE, 0); }
 		public CondExprContext condExpr() {
@@ -922,6 +950,7 @@ public class PascalzinhoParser extends Parser {
 		}
 	}
 	public static class IfStmtContext extends CondContext {
+		public CondExprContext condExpr;
 		public BlockContext b1;
 		public TerminalNode IF() { return getToken(PascalzinhoParser.IF, 0); }
 		public CondExprContext condExpr() {
@@ -941,6 +970,7 @@ public class PascalzinhoParser extends Parser {
 		}
 	}
 	public static class IfElseStmtContext extends CondContext {
+		public CondExprContext condExpr;
 		public BlockContext b1;
 		public BlockContext b2;
 		public TerminalNode IF() { return getToken(PascalzinhoParser.IF, 0); }
@@ -964,57 +994,35 @@ public class PascalzinhoParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class ForStmt2Context extends CondContext {
-		public Token n;
-		public Token m;
-		public BlockContext b1;
-		public TerminalNode FOR() { return getToken(PascalzinhoParser.FOR, 0); }
-		public TerminalNode TO() { return getToken(PascalzinhoParser.TO, 0); }
-		public TerminalNode DO() { return getToken(PascalzinhoParser.DO, 0); }
-		public TerminalNode BEGIN() { return getToken(PascalzinhoParser.BEGIN, 0); }
-		public TerminalNode END() { return getToken(PascalzinhoParser.END, 0); }
-		public TerminalNode EOL() { return getToken(PascalzinhoParser.EOL, 0); }
-		public List<TerminalNode> NUM() { return getTokens(PascalzinhoParser.NUM); }
-		public TerminalNode NUM(int i) {
-			return getToken(PascalzinhoParser.NUM, i);
-		}
-		public BlockContext block() {
-			return getRuleContext(BlockContext.class,0);
-		}
-		public ForStmt2Context(CondContext ctx) { copyFrom(ctx); }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PascalzinhoVisitor ) return ((PascalzinhoVisitor<? extends T>)visitor).visitForStmt2(this);
-			else return visitor.visitChildren(this);
-		}
-	}
 
 	public final CondContext cond() throws RecognitionException {
 		CondContext _localctx = new CondContext(_ctx, getState());
 		enterRule(_localctx, 18, RULE_cond);
 		try {
-			setState(197);
+			setState(213);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,11,_ctx) ) {
 			case 1:
 				_localctx = new IfStmtContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(147);
+				setState(163);
 				match(IF);
-				setState(148);
+				setState(164);
 				match(OPEN);
-				setState(149);
-				condExpr();
-				setState(150);
+				setState(165);
+				((IfStmtContext)_localctx).condExpr = condExpr();
+				setState(166);
 				match(CLOSE);
-				setState(151);
+				setState(167);
 				match(THEN);
-				setState(152);
+				tr+="if("+(((IfStmtContext)_localctx).condExpr!=null?_input.getText(((IfStmtContext)_localctx).condExpr.start,((IfStmtContext)_localctx).condExpr.stop):null)+")"+open+"\n";
+				setState(169);
 				((IfStmtContext)_localctx).b1 = block();
-				setState(153);
+				setState(170);
 				match(END);
-				setState(154);
+				tr+=close+"\n";
+				setState(172);
 				match(EOL);
 				}
 				break;
@@ -1022,25 +1030,29 @@ public class PascalzinhoParser extends Parser {
 				_localctx = new IfElseStmtContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(156);
+				setState(174);
 				match(IF);
-				setState(157);
+				setState(175);
 				match(OPEN);
-				setState(158);
-				condExpr();
-				setState(159);
+				setState(176);
+				((IfElseStmtContext)_localctx).condExpr = condExpr();
+				setState(177);
 				match(CLOSE);
-				setState(160);
+				setState(178);
 				match(THEN);
-				setState(161);
+				tr+="if("+(((IfElseStmtContext)_localctx).condExpr!=null?_input.getText(((IfElseStmtContext)_localctx).condExpr.start,((IfElseStmtContext)_localctx).condExpr.stop):null)+")"+open+"\n";
+				setState(180);
 				((IfElseStmtContext)_localctx).b1 = block();
-				setState(162);
+				tr+=close;
+				setState(182);
 				match(ELSE);
-				setState(163);
+				tr+="else"+open+"\n";
+				setState(184);
 				((IfElseStmtContext)_localctx).b2 = block();
-				setState(164);
+				setState(185);
 				match(END);
-				setState(165);
+				tr+=close+"\n";
+				setState(187);
 				match(EOL);
 				}
 				break;
@@ -1048,23 +1060,25 @@ public class PascalzinhoParser extends Parser {
 				_localctx = new WhileStmtContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(167);
+				setState(189);
 				match(WHILE);
-				setState(168);
+				setState(190);
 				match(OPEN);
-				setState(169);
-				condExpr();
-				setState(170);
+				setState(191);
+				((WhileStmtContext)_localctx).condExpr = condExpr();
+				setState(192);
 				match(CLOSE);
-				setState(171);
+				setState(193);
 				match(DO);
-				setState(172);
+				setState(194);
 				match(BEGIN);
-				setState(173);
+				tr+="while("+(((WhileStmtContext)_localctx).condExpr!=null?_input.getText(((WhileStmtContext)_localctx).condExpr.start,((WhileStmtContext)_localctx).condExpr.stop):null)+")"+open+"\n";
+				setState(196);
 				((WhileStmtContext)_localctx).b1 = block();
-				setState(174);
+				setState(197);
 				match(END);
-				setState(175);
+				tr+=close+"\n";
+				setState(199);
 				match(EOL);
 				}
 				break;
@@ -1072,47 +1086,25 @@ public class PascalzinhoParser extends Parser {
 				_localctx = new ForStmtContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(177);
+				setState(201);
 				match(FOR);
-				setState(178);
-				attr();
-				setState(179);
+				setState(202);
+				((ForStmtContext)_localctx).attr = attr();
+				setState(203);
 				match(TO);
-				setState(180);
+				setState(204);
 				((ForStmtContext)_localctx).n = match(NUM);
-				setState(181);
+				setState(205);
 				match(DO);
-				setState(182);
+				setState(206);
 				match(BEGIN);
-				setState(183);
+				String at = (((ForStmtContext)_localctx).attr!=null?_input.getText(((ForStmtContext)_localctx).attr.start,((ForStmtContext)_localctx).attr.stop):null); at= at.replace(":","");tr+="for("+at+";"+((ForStmtContext)_localctx).attr.nome+"<"+(((ForStmtContext)_localctx).n!=null?((ForStmtContext)_localctx).n.getText():null)+";"+((ForStmtContext)_localctx).attr.nome+"++)"+open+"\n";
+				setState(208);
 				((ForStmtContext)_localctx).b1 = block();
-				setState(184);
+				setState(209);
 				match(END);
-				setState(185);
-				match(EOL);
-				}
-				break;
-			case 5:
-				_localctx = new ForStmt2Context(_localctx);
-				enterOuterAlt(_localctx, 5);
-				{
-				setState(187);
-				match(FOR);
-				setState(188);
-				((ForStmt2Context)_localctx).n = match(NUM);
-				setState(189);
-				match(TO);
-				setState(190);
-				((ForStmt2Context)_localctx).m = match(NUM);
-				setState(191);
-				match(DO);
-				setState(192);
-				match(BEGIN);
-				setState(193);
-				((ForStmt2Context)_localctx).b1 = block();
-				setState(194);
-				match(END);
-				setState(195);
+				tr+=close+"\n";
+				setState(211);
 				match(EOL);
 				}
 				break;
@@ -1172,14 +1164,14 @@ public class PascalzinhoParser extends Parser {
 		enterRule(_localctx, 20, RULE_condExpr);
 		int _la;
 		try {
-			setState(204);
+			setState(220);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,12,_ctx) ) {
 			case 1:
 				_localctx = new CondExpresionContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(199);
+				setState(215);
 				expr();
 				}
 				break;
@@ -1187,9 +1179,9 @@ public class PascalzinhoParser extends Parser {
 				_localctx = new CondRelOpContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(200);
+				setState(216);
 				expr();
-				setState(201);
+				setState(217);
 				((CondRelOpContext)_localctx).relop = _input.LT(1);
 				_la = _input.LA(1);
 				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << GT) | (1L << LT) | (1L << EQ) | (1L << GE) | (1L << LE) | (1L << NE))) != 0)) ) {
@@ -1200,7 +1192,7 @@ public class PascalzinhoParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(202);
+				setState(218);
 				expr();
 				}
 				break;
@@ -1247,7 +1239,7 @@ public class PascalzinhoParser extends Parser {
 			_localctx = new BlockStmtContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(206);
+			setState(222);
 			start();
 			}
 		}
@@ -1274,6 +1266,7 @@ public class PascalzinhoParser extends Parser {
 		}
 	}
 	public static class PrintExprLnContext extends WriteContext {
+		public ExprContext expr;
 		public TerminalNode WRITELN() { return getToken(PascalzinhoParser.WRITELN, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
@@ -1286,6 +1279,7 @@ public class PascalzinhoParser extends Parser {
 		}
 	}
 	public static class PrintStrLnContext extends WriteContext {
+		public Token STR;
 		public TerminalNode WRITELN() { return getToken(PascalzinhoParser.WRITELN, 0); }
 		public TerminalNode STR() { return getToken(PascalzinhoParser.STR, 0); }
 		public PrintStrLnContext(WriteContext ctx) { copyFrom(ctx); }
@@ -1296,6 +1290,7 @@ public class PascalzinhoParser extends Parser {
 		}
 	}
 	public static class PrintStrContext extends WriteContext {
+		public Token STR;
 		public TerminalNode WRITE() { return getToken(PascalzinhoParser.WRITE, 0); }
 		public TerminalNode STR() { return getToken(PascalzinhoParser.STR, 0); }
 		public PrintStrContext(WriteContext ctx) { copyFrom(ctx); }
@@ -1306,6 +1301,7 @@ public class PascalzinhoParser extends Parser {
 		}
 	}
 	public static class PrintExprContext extends WriteContext {
+		public ExprContext expr;
 		public TerminalNode WRITE() { return getToken(PascalzinhoParser.WRITE, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
@@ -1322,47 +1318,51 @@ public class PascalzinhoParser extends Parser {
 		WriteContext _localctx = new WriteContext(_ctx, getState());
 		enterRule(_localctx, 24, RULE_write);
 		try {
-			setState(216);
+			setState(238);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,13,_ctx) ) {
 			case 1:
 				_localctx = new PrintStrContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(208);
+				setState(224);
 				match(WRITE);
-				setState(209);
-				match(STR);
+				setState(225);
+				((PrintStrContext)_localctx).STR = match(STR);
+				tr+="cout <<"+ (((PrintStrContext)_localctx).STR!=null?((PrintStrContext)_localctx).STR.getText():null)+";\n";
 				}
 				break;
 			case 2:
 				_localctx = new PrintExprContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(210);
+				setState(227);
 				match(WRITE);
-				setState(211);
-				expr();
+				setState(228);
+				((PrintExprContext)_localctx).expr = expr();
+				tr+="cout <<"+(((PrintExprContext)_localctx).expr!=null?_input.getText(((PrintExprContext)_localctx).expr.start,((PrintExprContext)_localctx).expr.stop):null)+";\n";
 				}
 				break;
 			case 3:
 				_localctx = new PrintStrLnContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(212);
+				setState(231);
 				match(WRITELN);
-				setState(213);
-				match(STR);
+				setState(232);
+				((PrintStrLnContext)_localctx).STR = match(STR);
+				tr+="cout <<"+(((PrintStrLnContext)_localctx).STR!=null?((PrintStrLnContext)_localctx).STR.getText():null)+"endl;\n";
 				}
 				break;
 			case 4:
 				_localctx = new PrintExprLnContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(214);
+				setState(234);
 				match(WRITELN);
-				setState(215);
-				expr();
+				setState(235);
+				((PrintExprLnContext)_localctx).expr = expr();
+				tr+="cout <<"+(((PrintExprLnContext)_localctx).expr!=null?_input.getText(((PrintExprLnContext)_localctx).expr.start,((PrintExprLnContext)_localctx).expr.stop):null)+"endl;\n";
 				}
 				break;
 			}
@@ -1390,6 +1390,7 @@ public class PascalzinhoParser extends Parser {
 		}
 	}
 	public static class ReadVarContext extends ReadlnContext {
+		public Token VARNAME;
 		public TerminalNode READLN() { return getToken(PascalzinhoParser.READLN, 0); }
 		public TerminalNode VARNAME() { return getToken(PascalzinhoParser.VARNAME, 0); }
 		public ReadVarContext(ReadlnContext ctx) { copyFrom(ctx); }
@@ -1407,10 +1408,11 @@ public class PascalzinhoParser extends Parser {
 			_localctx = new ReadVarContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(218);
+			setState(240);
 			match(READLN);
-			setState(219);
-			match(VARNAME);
+			setState(241);
+			((ReadVarContext)_localctx).VARNAME = match(VARNAME);
+			tr+="cin >> "+(((ReadVarContext)_localctx).VARNAME!=null?((ReadVarContext)_localctx).VARNAME.getText():null)+";\n";
 			}
 		}
 		catch (RecognitionException re) {
@@ -1425,6 +1427,7 @@ public class PascalzinhoParser extends Parser {
 	}
 
 	public static class AttrContext extends ParserRuleContext {
+		public String nome;
 		public AttrContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1433,9 +1436,12 @@ public class PascalzinhoParser extends Parser {
 		public AttrContext() { }
 		public void copyFrom(AttrContext ctx) {
 			super.copyFrom(ctx);
+			this.nome = ctx.nome;
 		}
 	}
 	public static class AttrBoolContext extends AttrContext {
+		public Token VARNAME;
+		public TruefalseContext truefalse;
 		public TerminalNode VARNAME() { return getToken(PascalzinhoParser.VARNAME, 0); }
 		public TruefalseContext truefalse() {
 			return getRuleContext(TruefalseContext.class,0);
@@ -1448,6 +1454,8 @@ public class PascalzinhoParser extends Parser {
 		}
 	}
 	public static class AttrExprContext extends AttrContext {
+		public Token VARNAME;
+		public ExprContext expr;
 		public TerminalNode VARNAME() { return getToken(PascalzinhoParser.VARNAME, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
@@ -1460,6 +1468,8 @@ public class PascalzinhoParser extends Parser {
 		}
 	}
 	public static class AttrStringContext extends AttrContext {
+		public Token VARNAME;
+		public Token STR;
 		public TerminalNode VARNAME() { return getToken(PascalzinhoParser.VARNAME, 0); }
 		public TerminalNode STR() { return getToken(PascalzinhoParser.STR, 0); }
 		public AttrStringContext(AttrContext ctx) { copyFrom(ctx); }
@@ -1474,43 +1484,46 @@ public class PascalzinhoParser extends Parser {
 		AttrContext _localctx = new AttrContext(_ctx, getState());
 		enterRule(_localctx, 28, RULE_attr);
 		try {
-			setState(230);
+			setState(258);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,14,_ctx) ) {
 			case 1:
 				_localctx = new AttrExprContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(221);
-				match(VARNAME);
-				setState(222);
+				setState(244);
+				((AttrExprContext)_localctx).VARNAME = match(VARNAME);
+				setState(245);
 				match(T__5);
-				setState(223);
-				expr();
+				setState(246);
+				((AttrExprContext)_localctx).expr = expr();
+				tr+=(((AttrExprContext)_localctx).VARNAME!=null?((AttrExprContext)_localctx).VARNAME.getText():null)+" = "+(((AttrExprContext)_localctx).expr!=null?_input.getText(((AttrExprContext)_localctx).expr.start,((AttrExprContext)_localctx).expr.stop):null)+";\n"; ((AttrExprContext)_localctx).nome = (((AttrExprContext)_localctx).VARNAME!=null?((AttrExprContext)_localctx).VARNAME.getText():null);
 				}
 				break;
 			case 2:
 				_localctx = new AttrStringContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(224);
-				match(VARNAME);
-				setState(225);
+				setState(249);
+				((AttrStringContext)_localctx).VARNAME = match(VARNAME);
+				setState(250);
 				match(T__5);
-				setState(226);
-				match(STR);
+				setState(251);
+				((AttrStringContext)_localctx).STR = match(STR);
+				tr+=(((AttrStringContext)_localctx).VARNAME!=null?((AttrStringContext)_localctx).VARNAME.getText():null)+" = "+(((AttrStringContext)_localctx).STR!=null?((AttrStringContext)_localctx).STR.getText():null)+";\n"; ((AttrStringContext)_localctx).nome = (((AttrStringContext)_localctx).VARNAME!=null?((AttrStringContext)_localctx).VARNAME.getText():null);
 				}
 				break;
 			case 3:
 				_localctx = new AttrBoolContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(227);
-				match(VARNAME);
-				setState(228);
+				setState(253);
+				((AttrBoolContext)_localctx).VARNAME = match(VARNAME);
+				setState(254);
 				match(T__5);
-				setState(229);
-				truefalse();
+				setState(255);
+				((AttrBoolContext)_localctx).truefalse = truefalse();
+				tr+=(((AttrBoolContext)_localctx).VARNAME!=null?((AttrBoolContext)_localctx).VARNAME.getText():null)+" = "+(((AttrBoolContext)_localctx).truefalse!=null?_input.getText(((AttrBoolContext)_localctx).truefalse.start,((AttrBoolContext)_localctx).truefalse.stop):null)+";\n"; ((AttrBoolContext)_localctx).nome = (((AttrBoolContext)_localctx).VARNAME!=null?((AttrBoolContext)_localctx).VARNAME.getText():null);
 				}
 				break;
 			}
@@ -1547,7 +1560,7 @@ public class PascalzinhoParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(232);
+			setState(260);
 			_la = _input.LA(1);
 			if ( !(_la==TRUE || _la==FALSE) ) {
 			_errHandler.recoverInline(this);
@@ -1625,18 +1638,18 @@ public class PascalzinhoParser extends Parser {
 		ExprContext _localctx = new ExprContext(_ctx, getState());
 		enterRule(_localctx, 32, RULE_expr);
 		try {
-			setState(243);
+			setState(271);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,15,_ctx) ) {
 			case 1:
 				_localctx = new ExprPlusContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(234);
+				setState(262);
 				expr1();
-				setState(235);
+				setState(263);
 				match(PLUS);
-				setState(236);
+				setState(264);
 				expr();
 				}
 				break;
@@ -1644,11 +1657,11 @@ public class PascalzinhoParser extends Parser {
 				_localctx = new ExprMinusContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(238);
+				setState(266);
 				expr1();
-				setState(239);
+				setState(267);
 				match(MINUS);
-				setState(240);
+				setState(268);
 				expr();
 				}
 				break;
@@ -1656,7 +1669,7 @@ public class PascalzinhoParser extends Parser {
 				_localctx = new Expr1EmptyContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(242);
+				setState(270);
 				expr1();
 				}
 				break;
@@ -1728,18 +1741,18 @@ public class PascalzinhoParser extends Parser {
 		Expr1Context _localctx = new Expr1Context(_ctx, getState());
 		enterRule(_localctx, 34, RULE_expr1);
 		try {
-			setState(254);
+			setState(282);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,16,_ctx) ) {
 			case 1:
 				_localctx = new Expr1MultContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(245);
+				setState(273);
 				expr2();
-				setState(246);
+				setState(274);
 				match(MULT);
-				setState(247);
+				setState(275);
 				expr();
 				}
 				break;
@@ -1747,11 +1760,11 @@ public class PascalzinhoParser extends Parser {
 				_localctx = new Expr1DivContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(249);
+				setState(277);
 				expr2();
-				setState(250);
+				setState(278);
 				match(DIV);
-				setState(251);
+				setState(279);
 				expr();
 				}
 				break;
@@ -1759,7 +1772,7 @@ public class PascalzinhoParser extends Parser {
 				_localctx = new Expr2EmptyContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(253);
+				setState(281);
 				expr2();
 				}
 				break;
@@ -1821,18 +1834,18 @@ public class PascalzinhoParser extends Parser {
 		Expr2Context _localctx = new Expr2Context(_ctx, getState());
 		enterRule(_localctx, 36, RULE_expr2);
 		try {
-			setState(262);
+			setState(290);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case OPEN:
 				_localctx = new Expr2ParContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(256);
+				setState(284);
 				match(OPEN);
-				setState(257);
+				setState(285);
 				expr();
-				setState(258);
+				setState(286);
 				match(CLOSE);
 				}
 				break;
@@ -1840,7 +1853,7 @@ public class PascalzinhoParser extends Parser {
 				_localctx = new Expr2NumContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(260);
+				setState(288);
 				match(NUM);
 				}
 				break;
@@ -1848,7 +1861,7 @@ public class PascalzinhoParser extends Parser {
 				_localctx = new Expr2VarContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(261);
+				setState(289);
 				match(VARNAME);
 				}
 				break;
@@ -1868,93 +1881,103 @@ public class PascalzinhoParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\64\u010b\4\2\t\2"+
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\64\u0127\4\2\t\2"+
 		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
-		"\4\23\t\23\4\24\t\24\3\2\3\2\3\2\3\2\5\2-\n\2\3\2\5\2\60\n\2\3\2\3\2\3"+
-		"\2\3\2\5\2\66\n\2\3\3\3\3\3\3\3\4\3\4\7\4=\n\4\f\4\16\4@\13\4\3\4\3\4"+
-		"\3\4\3\4\3\4\3\4\5\4H\n\4\3\5\3\5\3\5\3\6\3\6\3\6\3\6\3\6\5\6R\n\6\3\7"+
+		"\4\23\t\23\4\24\t\24\3\2\3\2\3\2\3\2\3\2\5\2.\n\2\3\2\5\2\61\n\2\3\2\3"+
+		"\2\3\2\3\2\5\2\67\n\2\3\3\3\3\3\3\3\4\3\4\3\4\7\4?\n\4\f\4\16\4B\13\4"+
+		"\3\4\3\4\3\4\3\4\3\4\3\4\5\4J\n\4\3\5\3\5\3\5\3\5\3\6\3\6\3\6\3\6\3\6"+
+		"\3\6\3\6\3\6\3\6\3\6\3\6\5\6[\n\6\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7"+
 		"\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3"+
-		"\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\5\7t\n\7\3\b\3"+
-		"\b\3\t\3\t\6\tz\n\t\r\t\16\t{\3\t\3\t\3\t\6\t\u0081\n\t\r\t\16\t\u0082"+
-		"\5\t\u0085\n\t\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\5\n"+
-		"\u0094\n\n\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13"+
-		"\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13"+
-		"\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13"+
-		"\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\5\13\u00c8\n\13\3\f"+
-		"\3\f\3\f\3\f\3\f\5\f\u00cf\n\f\3\r\3\r\3\16\3\16\3\16\3\16\3\16\3\16\3"+
-		"\16\3\16\5\16\u00db\n\16\3\17\3\17\3\17\3\20\3\20\3\20\3\20\3\20\3\20"+
-		"\3\20\3\20\3\20\5\20\u00e9\n\20\3\21\3\21\3\22\3\22\3\22\3\22\3\22\3\22"+
-		"\3\22\3\22\3\22\5\22\u00f6\n\22\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23"+
-		"\3\23\5\23\u0101\n\23\3\24\3\24\3\24\3\24\3\24\3\24\5\24\u0109\n\24\3"+
+		"\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\5\7\u0081\n\7\3\b\3\b\3\t\3\t\3"+
+		"\t\6\t\u0088\n\t\r\t\16\t\u0089\3\t\3\t\3\t\3\t\3\t\6\t\u0091\n\t\r\t"+
+		"\16\t\u0092\5\t\u0095\n\t\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n"+
+		"\3\n\3\n\5\n\u00a4\n\n\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3"+
+		"\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3"+
+		"\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3"+
+		"\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\5\13\u00d8"+
+		"\n\13\3\f\3\f\3\f\3\f\3\f\5\f\u00df\n\f\3\r\3\r\3\16\3\16\3\16\3\16\3"+
+		"\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\5\16\u00f1\n\16\3\17"+
+		"\3\17\3\17\3\17\3\20\3\20\3\20\3\20\3\20\3\20\3\20\3\20\3\20\3\20\3\20"+
+		"\3\20\3\20\3\20\5\20\u0105\n\20\3\21\3\21\3\22\3\22\3\22\3\22\3\22\3\22"+
+		"\3\22\3\22\3\22\5\22\u0112\n\22\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23"+
+		"\3\23\5\23\u011d\n\23\3\24\3\24\3\24\3\24\3\24\3\24\5\24\u0125\n\24\3"+
 		"\24\2\2\25\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&\2\4\3\2!&\3\2\35"+
-		"\36\u011a\2\65\3\2\2\2\4\67\3\2\2\2\6G\3\2\2\2\bI\3\2\2\2\nQ\3\2\2\2\f"+
-		"s\3\2\2\2\16u\3\2\2\2\20\u0084\3\2\2\2\22\u0093\3\2\2\2\24\u00c7\3\2\2"+
-		"\2\26\u00ce\3\2\2\2\30\u00d0\3\2\2\2\32\u00da\3\2\2\2\34\u00dc\3\2\2\2"+
-		"\36\u00e8\3\2\2\2 \u00ea\3\2\2\2\"\u00f5\3\2\2\2$\u0100\3\2\2\2&\u0108"+
-		"\3\2\2\2()\7\34\2\2)*\7\63\2\2*,\7\60\2\2+-\5\4\3\2,+\3\2\2\2,-\3\2\2"+
-		"\2-/\3\2\2\2.\60\5\16\b\2/.\3\2\2\2/\60\3\2\2\2\60\66\3\2\2\2\61\62\7"+
-		"\34\2\2\62\63\7\63\2\2\63\64\7\60\2\2\64\66\5\20\t\2\65(\3\2\2\2\65\61"+
-		"\3\2\2\2\66\3\3\2\2\2\678\7\32\2\289\5\6\4\29\5\3\2\2\2:>\7\62\2\2;=\5"+
-		"\b\5\2<;\3\2\2\2=@\3\2\2\2><\3\2\2\2>?\3\2\2\2?A\3\2\2\2@>\3\2\2\2AB\7"+
-		"\3\2\2BC\5\n\6\2CD\7\60\2\2DE\5\6\4\2EH\3\2\2\2FH\5\20\t\2G:\3\2\2\2G"+
-		"F\3\2\2\2H\7\3\2\2\2IJ\7\4\2\2JK\7\62\2\2K\t\3\2\2\2LR\7\23\2\2MR\7\24"+
-		"\2\2NR\7\25\2\2OR\7\26\2\2PR\5\f\7\2QL\3\2\2\2QM\3\2\2\2QN\3\2\2\2QO\3"+
-		"\2\2\2QP\3\2\2\2R\13\3\2\2\2ST\7\31\2\2TU\7\5\2\2UV\7\61\2\2VW\7\6\2\2"+
-		"WX\7\61\2\2XY\7\7\2\2YZ\7\37\2\2Zt\7\23\2\2[\\\7\31\2\2\\]\7\5\2\2]^\7"+
-		"\61\2\2^_\7\6\2\2_`\7\61\2\2`a\7\7\2\2ab\7\37\2\2bt\7\24\2\2cd\7\31\2"+
-		"\2de\7\5\2\2ef\7\61\2\2fg\7\6\2\2gh\7\61\2\2hi\7\7\2\2ij\7\37\2\2jt\7"+
-		"\26\2\2kl\7\31\2\2lm\7\5\2\2mn\7\61\2\2no\7\6\2\2op\7\61\2\2pq\7\7\2\2"+
-		"qr\7\37\2\2rt\7\25\2\2sS\3\2\2\2s[\3\2\2\2sc\3\2\2\2sk\3\2\2\2t\r\3\2"+
-		"\2\2uv\3\2\2\2v\17\3\2\2\2wy\7\13\2\2xz\5\22\n\2yx\3\2\2\2z{\3\2\2\2{"+
-		"y\3\2\2\2{|\3\2\2\2|}\3\2\2\2}~\7\r\2\2~\u0085\3\2\2\2\177\u0081\5\22"+
-		"\n\2\u0080\177\3\2\2\2\u0081\u0082\3\2\2\2\u0082\u0080\3\2\2\2\u0082\u0083"+
-		"\3\2\2\2\u0083\u0085\3\2\2\2\u0084w\3\2\2\2\u0084\u0080\3\2\2\2\u0085"+
-		"\21\3\2\2\2\u0086\u0087\5\32\16\2\u0087\u0088\7\60\2\2\u0088\u0094\3\2"+
-		"\2\2\u0089\u008a\5\34\17\2\u008a\u008b\7\60\2\2\u008b\u0094\3\2\2\2\u008c"+
-		"\u008d\5\36\20\2\u008d\u008e\7\60\2\2\u008e\u0094\3\2\2\2\u008f\u0090"+
-		"\5\"\22\2\u0090\u0091\7\60\2\2\u0091\u0094\3\2\2\2\u0092\u0094\5\24\13"+
-		"\2\u0093\u0086\3\2\2\2\u0093\u0089\3\2\2\2\u0093\u008c\3\2\2\2\u0093\u008f"+
-		"\3\2\2\2\u0093\u0092\3\2\2\2\u0094\23\3\2\2\2\u0095\u0096\7\n\2\2\u0096"+
-		"\u0097\7+\2\2\u0097\u0098\5\26\f\2\u0098\u0099\7,\2\2\u0099\u009a\7\17"+
-		"\2\2\u009a\u009b\5\30\r\2\u009b\u009c\7\f\2\2\u009c\u009d\7\60\2\2\u009d"+
-		"\u00c8\3\2\2\2\u009e\u009f\7\n\2\2\u009f\u00a0\7+\2\2\u00a0\u00a1\5\26"+
-		"\f\2\u00a1\u00a2\7,\2\2\u00a2\u00a3\7\17\2\2\u00a3\u00a4\5\30\r\2\u00a4"+
-		"\u00a5\7\16\2\2\u00a5\u00a6\5\30\r\2\u00a6\u00a7\7\f\2\2\u00a7\u00a8\7"+
-		"\60\2\2\u00a8\u00c8\3\2\2\2\u00a9\u00aa\7\30\2\2\u00aa\u00ab\7+\2\2\u00ab"+
-		"\u00ac\5\26\f\2\u00ac\u00ad\7,\2\2\u00ad\u00ae\7 \2\2\u00ae\u00af\7\13"+
-		"\2\2\u00af\u00b0\5\30\r\2\u00b0\u00b1\7\f\2\2\u00b1\u00b2\7\60\2\2\u00b2"+
-		"\u00c8\3\2\2\2\u00b3\u00b4\7\27\2\2\u00b4\u00b5\5\36\20\2\u00b5\u00b6"+
-		"\7\t\2\2\u00b6\u00b7\7\61\2\2\u00b7\u00b8\7 \2\2\u00b8\u00b9\7\13\2\2"+
-		"\u00b9\u00ba\5\30\r\2\u00ba\u00bb\7\f\2\2\u00bb\u00bc\7\60\2\2\u00bc\u00c8"+
-		"\3\2\2\2\u00bd\u00be\7\27\2\2\u00be\u00bf\7\61\2\2\u00bf\u00c0\7\t\2\2"+
-		"\u00c0\u00c1\7\61\2\2\u00c1\u00c2\7 \2\2\u00c2\u00c3\7\13\2\2\u00c3\u00c4"+
-		"\5\30\r\2\u00c4\u00c5\7\f\2\2\u00c5\u00c6\7\60\2\2\u00c6\u00c8\3\2\2\2"+
-		"\u00c7\u0095\3\2\2\2\u00c7\u009e\3\2\2\2\u00c7\u00a9\3\2\2\2\u00c7\u00b3"+
-		"\3\2\2\2\u00c7\u00bd\3\2\2\2\u00c8\25\3\2\2\2\u00c9\u00cf\5\"\22\2\u00ca"+
-		"\u00cb\5\"\22\2\u00cb\u00cc\t\2\2\2\u00cc\u00cd\5\"\22\2\u00cd\u00cf\3"+
-		"\2\2\2\u00ce\u00c9\3\2\2\2\u00ce\u00ca\3\2\2\2\u00cf\27\3\2\2\2\u00d0"+
-		"\u00d1\5\20\t\2\u00d1\31\3\2\2\2\u00d2\u00d3\7\20\2\2\u00d3\u00db\7\63"+
-		"\2\2\u00d4\u00d5\7\20\2\2\u00d5\u00db\5\"\22\2\u00d6\u00d7\7\21\2\2\u00d7"+
-		"\u00db\7\63\2\2\u00d8\u00d9\7\21\2\2\u00d9\u00db\5\"\22\2\u00da\u00d2"+
-		"\3\2\2\2\u00da\u00d4\3\2\2\2\u00da\u00d6\3\2\2\2\u00da\u00d8\3\2\2\2\u00db"+
-		"\33\3\2\2\2\u00dc\u00dd\7\22\2\2\u00dd\u00de\7\62\2\2\u00de\35\3\2\2\2"+
-		"\u00df\u00e0\7\62\2\2\u00e0\u00e1\7\b\2\2\u00e1\u00e9\5\"\22\2\u00e2\u00e3"+
-		"\7\62\2\2\u00e3\u00e4\7\b\2\2\u00e4\u00e9\7\63\2\2\u00e5\u00e6\7\62\2"+
-		"\2\u00e6\u00e7\7\b\2\2\u00e7\u00e9\5 \21\2\u00e8\u00df\3\2\2\2\u00e8\u00e2"+
-		"\3\2\2\2\u00e8\u00e5\3\2\2\2\u00e9\37\3\2\2\2\u00ea\u00eb\t\3\2\2\u00eb"+
-		"!\3\2\2\2\u00ec\u00ed\5$\23\2\u00ed\u00ee\7\'\2\2\u00ee\u00ef\5\"\22\2"+
-		"\u00ef\u00f6\3\2\2\2\u00f0\u00f1\5$\23\2\u00f1\u00f2\7(\2\2\u00f2\u00f3"+
-		"\5\"\22\2\u00f3\u00f6\3\2\2\2\u00f4\u00f6\5$\23\2\u00f5\u00ec\3\2\2\2"+
-		"\u00f5\u00f0\3\2\2\2\u00f5\u00f4\3\2\2\2\u00f6#\3\2\2\2\u00f7\u00f8\5"+
-		"&\24\2\u00f8\u00f9\7)\2\2\u00f9\u00fa\5\"\22\2\u00fa\u0101\3\2\2\2\u00fb"+
-		"\u00fc\5&\24\2\u00fc\u00fd\7*\2\2\u00fd\u00fe\5\"\22\2\u00fe\u0101\3\2"+
-		"\2\2\u00ff\u0101\5&\24\2\u0100\u00f7\3\2\2\2\u0100\u00fb\3\2\2\2\u0100"+
-		"\u00ff\3\2\2\2\u0101%\3\2\2\2\u0102\u0103\7+\2\2\u0103\u0104\5\"\22\2"+
-		"\u0104\u0105\7,\2\2\u0105\u0109\3\2\2\2\u0106\u0109\7\61\2\2\u0107\u0109"+
-		"\7\62\2\2\u0108\u0102\3\2\2\2\u0108\u0106\3\2\2\2\u0108\u0107\3\2\2\2"+
-		"\u0109\'\3\2\2\2\24,/\65>GQs{\u0082\u0084\u0093\u00c7\u00ce\u00da\u00e8"+
-		"\u00f5\u0100\u0108";
+		"\36\u0135\2\66\3\2\2\2\48\3\2\2\2\6I\3\2\2\2\bK\3\2\2\2\nZ\3\2\2\2\f\u0080"+
+		"\3\2\2\2\16\u0082\3\2\2\2\20\u0094\3\2\2\2\22\u00a3\3\2\2\2\24\u00d7\3"+
+		"\2\2\2\26\u00de\3\2\2\2\30\u00e0\3\2\2\2\32\u00f0\3\2\2\2\34\u00f2\3\2"+
+		"\2\2\36\u0104\3\2\2\2 \u0106\3\2\2\2\"\u0111\3\2\2\2$\u011c\3\2\2\2&\u0124"+
+		"\3\2\2\2()\7\34\2\2)*\b\2\1\2*+\7\63\2\2+-\7\60\2\2,.\5\4\3\2-,\3\2\2"+
+		"\2-.\3\2\2\2.\60\3\2\2\2/\61\5\16\b\2\60/\3\2\2\2\60\61\3\2\2\2\61\67"+
+		"\3\2\2\2\62\63\7\34\2\2\63\64\7\63\2\2\64\65\7\60\2\2\65\67\5\20\t\2\66"+
+		"(\3\2\2\2\66\62\3\2\2\2\67\3\3\2\2\289\7\32\2\29:\5\6\4\2:\5\3\2\2\2;"+
+		"<\7\62\2\2<@\b\4\1\2=?\5\b\5\2>=\3\2\2\2?B\3\2\2\2@>\3\2\2\2@A\3\2\2\2"+
+		"AC\3\2\2\2B@\3\2\2\2CD\7\3\2\2DE\5\n\6\2EF\7\60\2\2FG\5\6\4\2GJ\3\2\2"+
+		"\2HJ\5\20\t\2I;\3\2\2\2IH\3\2\2\2J\7\3\2\2\2KL\7\4\2\2LM\7\62\2\2MN\b"+
+		"\5\1\2N\t\3\2\2\2OP\7\23\2\2P[\b\6\1\2QR\7\24\2\2R[\b\6\1\2ST\7\25\2\2"+
+		"T[\b\6\1\2UV\7\26\2\2V[\b\6\1\2WX\5\f\7\2XY\b\6\1\2Y[\3\2\2\2ZO\3\2\2"+
+		"\2ZQ\3\2\2\2ZS\3\2\2\2ZU\3\2\2\2ZW\3\2\2\2[\13\3\2\2\2\\]\7\31\2\2]^\7"+
+		"\5\2\2^_\7\61\2\2_`\7\6\2\2`a\7\61\2\2ab\7\7\2\2bc\7\37\2\2cd\7\23\2\2"+
+		"d\u0081\b\7\1\2ef\7\31\2\2fg\7\5\2\2gh\7\61\2\2hi\7\6\2\2ij\7\61\2\2j"+
+		"k\7\7\2\2kl\7\37\2\2lm\7\24\2\2m\u0081\b\7\1\2no\7\31\2\2op\7\5\2\2pq"+
+		"\7\61\2\2qr\7\6\2\2rs\7\61\2\2st\7\7\2\2tu\7\37\2\2uv\7\26\2\2v\u0081"+
+		"\b\7\1\2wx\7\31\2\2xy\7\5\2\2yz\7\61\2\2z{\7\6\2\2{|\7\61\2\2|}\7\7\2"+
+		"\2}~\7\37\2\2~\177\7\25\2\2\177\u0081\b\7\1\2\u0080\\\3\2\2\2\u0080e\3"+
+		"\2\2\2\u0080n\3\2\2\2\u0080w\3\2\2\2\u0081\r\3\2\2\2\u0082\u0083\3\2\2"+
+		"\2\u0083\17\3\2\2\2\u0084\u0085\7\13\2\2\u0085\u0087\b\t\1\2\u0086\u0088"+
+		"\5\22\n\2\u0087\u0086\3\2\2\2\u0088\u0089\3\2\2\2\u0089\u0087\3\2\2\2"+
+		"\u0089\u008a\3\2\2\2\u008a\u008b\3\2\2\2\u008b\u008c\7\r\2\2\u008c\u008d"+
+		"\b\t\1\2\u008d\u008e\b\t\1\2\u008e\u0095\3\2\2\2\u008f\u0091\5\22\n\2"+
+		"\u0090\u008f\3\2\2\2\u0091\u0092\3\2\2\2\u0092\u0090\3\2\2\2\u0092\u0093"+
+		"\3\2\2\2\u0093\u0095\3\2\2\2\u0094\u0084\3\2\2\2\u0094\u0090\3\2\2\2\u0095"+
+		"\21\3\2\2\2\u0096\u0097\5\32\16\2\u0097\u0098\7\60\2\2\u0098\u00a4\3\2"+
+		"\2\2\u0099\u009a\5\34\17\2\u009a\u009b\7\60\2\2\u009b\u00a4\3\2\2\2\u009c"+
+		"\u009d\5\36\20\2\u009d\u009e\7\60\2\2\u009e\u00a4\3\2\2\2\u009f\u00a0"+
+		"\5\"\22\2\u00a0\u00a1\7\60\2\2\u00a1\u00a4\3\2\2\2\u00a2\u00a4\5\24\13"+
+		"\2\u00a3\u0096\3\2\2\2\u00a3\u0099\3\2\2\2\u00a3\u009c\3\2\2\2\u00a3\u009f"+
+		"\3\2\2\2\u00a3\u00a2\3\2\2\2\u00a4\23\3\2\2\2\u00a5\u00a6\7\n\2\2\u00a6"+
+		"\u00a7\7+\2\2\u00a7\u00a8\5\26\f\2\u00a8\u00a9\7,\2\2\u00a9\u00aa\7\17"+
+		"\2\2\u00aa\u00ab\b\13\1\2\u00ab\u00ac\5\30\r\2\u00ac\u00ad\7\f\2\2\u00ad"+
+		"\u00ae\b\13\1\2\u00ae\u00af\7\60\2\2\u00af\u00d8\3\2\2\2\u00b0\u00b1\7"+
+		"\n\2\2\u00b1\u00b2\7+\2\2\u00b2\u00b3\5\26\f\2\u00b3\u00b4\7,\2\2\u00b4"+
+		"\u00b5\7\17\2\2\u00b5\u00b6\b\13\1\2\u00b6\u00b7\5\30\r\2\u00b7\u00b8"+
+		"\b\13\1\2\u00b8\u00b9\7\16\2\2\u00b9\u00ba\b\13\1\2\u00ba\u00bb\5\30\r"+
+		"\2\u00bb\u00bc\7\f\2\2\u00bc\u00bd\b\13\1\2\u00bd\u00be\7\60\2\2\u00be"+
+		"\u00d8\3\2\2\2\u00bf\u00c0\7\30\2\2\u00c0\u00c1\7+\2\2\u00c1\u00c2\5\26"+
+		"\f\2\u00c2\u00c3\7,\2\2\u00c3\u00c4\7 \2\2\u00c4\u00c5\7\13\2\2\u00c5"+
+		"\u00c6\b\13\1\2\u00c6\u00c7\5\30\r\2\u00c7\u00c8\7\f\2\2\u00c8\u00c9\b"+
+		"\13\1\2\u00c9\u00ca\7\60\2\2\u00ca\u00d8\3\2\2\2\u00cb\u00cc\7\27\2\2"+
+		"\u00cc\u00cd\5\36\20\2\u00cd\u00ce\7\t\2\2\u00ce\u00cf\7\61\2\2\u00cf"+
+		"\u00d0\7 \2\2\u00d0\u00d1\7\13\2\2\u00d1\u00d2\b\13\1\2\u00d2\u00d3\5"+
+		"\30\r\2\u00d3\u00d4\7\f\2\2\u00d4\u00d5\b\13\1\2\u00d5\u00d6\7\60\2\2"+
+		"\u00d6\u00d8\3\2\2\2\u00d7\u00a5\3\2\2\2\u00d7\u00b0\3\2\2\2\u00d7\u00bf"+
+		"\3\2\2\2\u00d7\u00cb\3\2\2\2\u00d8\25\3\2\2\2\u00d9\u00df\5\"\22\2\u00da"+
+		"\u00db\5\"\22\2\u00db\u00dc\t\2\2\2\u00dc\u00dd\5\"\22\2\u00dd\u00df\3"+
+		"\2\2\2\u00de\u00d9\3\2\2\2\u00de\u00da\3\2\2\2\u00df\27\3\2\2\2\u00e0"+
+		"\u00e1\5\20\t\2\u00e1\31\3\2\2\2\u00e2\u00e3\7\20\2\2\u00e3\u00e4\7\63"+
+		"\2\2\u00e4\u00f1\b\16\1\2\u00e5\u00e6\7\20\2\2\u00e6\u00e7\5\"\22\2\u00e7"+
+		"\u00e8\b\16\1\2\u00e8\u00f1\3\2\2\2\u00e9\u00ea\7\21\2\2\u00ea\u00eb\7"+
+		"\63\2\2\u00eb\u00f1\b\16\1\2\u00ec\u00ed\7\21\2\2\u00ed\u00ee\5\"\22\2"+
+		"\u00ee\u00ef\b\16\1\2\u00ef\u00f1\3\2\2\2\u00f0\u00e2\3\2\2\2\u00f0\u00e5"+
+		"\3\2\2\2\u00f0\u00e9\3\2\2\2\u00f0\u00ec\3\2\2\2\u00f1\33\3\2\2\2\u00f2"+
+		"\u00f3\7\22\2\2\u00f3\u00f4\7\62\2\2\u00f4\u00f5\b\17\1\2\u00f5\35\3\2"+
+		"\2\2\u00f6\u00f7\7\62\2\2\u00f7\u00f8\7\b\2\2\u00f8\u00f9\5\"\22\2\u00f9"+
+		"\u00fa\b\20\1\2\u00fa\u0105\3\2\2\2\u00fb\u00fc\7\62\2\2\u00fc\u00fd\7"+
+		"\b\2\2\u00fd\u00fe\7\63\2\2\u00fe\u0105\b\20\1\2\u00ff\u0100\7\62\2\2"+
+		"\u0100\u0101\7\b\2\2\u0101\u0102\5 \21\2\u0102\u0103\b\20\1\2\u0103\u0105"+
+		"\3\2\2\2\u0104\u00f6\3\2\2\2\u0104\u00fb\3\2\2\2\u0104\u00ff\3\2\2\2\u0105"+
+		"\37\3\2\2\2\u0106\u0107\t\3\2\2\u0107!\3\2\2\2\u0108\u0109\5$\23\2\u0109"+
+		"\u010a\7\'\2\2\u010a\u010b\5\"\22\2\u010b\u0112\3\2\2\2\u010c\u010d\5"+
+		"$\23\2\u010d\u010e\7(\2\2\u010e\u010f\5\"\22\2\u010f\u0112\3\2\2\2\u0110"+
+		"\u0112\5$\23\2\u0111\u0108\3\2\2\2\u0111\u010c\3\2\2\2\u0111\u0110\3\2"+
+		"\2\2\u0112#\3\2\2\2\u0113\u0114\5&\24\2\u0114\u0115\7)\2\2\u0115\u0116"+
+		"\5\"\22\2\u0116\u011d\3\2\2\2\u0117\u0118\5&\24\2\u0118\u0119\7*\2\2\u0119"+
+		"\u011a\5\"\22\2\u011a\u011d\3\2\2\2\u011b\u011d\5&\24\2\u011c\u0113\3"+
+		"\2\2\2\u011c\u0117\3\2\2\2\u011c\u011b\3\2\2\2\u011d%\3\2\2\2\u011e\u011f"+
+		"\7+\2\2\u011f\u0120\5\"\22\2\u0120\u0121\7,\2\2\u0121\u0125\3\2\2\2\u0122"+
+		"\u0125\7\61\2\2\u0123\u0125\7\62\2\2\u0124\u011e\3\2\2\2\u0124\u0122\3"+
+		"\2\2\2\u0124\u0123\3\2\2\2\u0125\'\3\2\2\2\24-\60\66@IZ\u0080\u0089\u0092"+
+		"\u0094\u00a3\u00d7\u00de\u00f0\u0104\u0111\u011c\u0124";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

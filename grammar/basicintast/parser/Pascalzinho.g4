@@ -1,35 +1,44 @@
+
 grammar Pascalzinho;
 
 @header{
 package basicintast.parser;
 import basicintast.util.*;
 }
+@members{
+String tr ="";
+String aux="";
+char open=123;
+char close=125;     
+}
 
-program : PROGRAM STR EOL var? procedure?        #programStmtBegin
+program : PROGRAM {tr+="#include<iostream>\n\nusing namespace std; \n\n";} STR EOL var? procedure?        #programStmtBegin
         | PROGRAM STR EOL start                       #programStmt
         ;
-var     : VAR var2;
-var2    : VARNAME varn* ':' type EOL  var2 #varNameFirst | start #startL ;
+var     : VAR   var2    ;
+var2    :  VARNAME  {aux+=$VARNAME.text;} varn* ':' type   EOL  var2  #varNameFirst  | start #startL ;
+ 
+varn : ',' VARNAME   {aux+=", "+$VARNAME.text;}#varName ;
+   
 
-varn : ',' VARNAME #varName;
 
-type    : INT
-        | FLOAT
-        | BOOLEAN
-        | STRING
-        | arraytype
+type    : INT  {tr+="int "+aux+"; \n"; aux="";}
+        | FLOAT {tr+="float "+aux+"; \n";aux="";}
+        | BOOLEAN {tr+="bool "+aux+"; \n";aux="";}
+        | STRING {tr+="string "+aux+"; \n";aux="";}
+        | arraytype {tr+=$arraytype.value+" "+aux+"["+$arraytype.n+"];\n";}
         ;
 
-arraytype   :   ARRAY '['n1=NUM'..'n2=NUM']' OF INT
-            |   ARRAY '['n1=NUM'..'n2=NUM']' OF FLOAT
-            |   ARRAY '['n1=NUM'..'n2=NUM']' OF STRING
-            |   ARRAY '['n1=NUM'..'n2=NUM']' OF BOOLEAN
+arraytype   returns [String value, String n]:   ARRAY '['n1=NUM'..'n2=NUM']' OF INT   {$value = "int "; $n = $n2.text+"-"+$n1.text;}
+            |   ARRAY '['n1=NUM'..'n2=NUM']' OF FLOAT                       {$value = "float "; $n = $n2.text+"-"+$n1.text;}
+            |   ARRAY '['n1=NUM'..'n2=NUM']' OF STRING                      {$value = "string "; $n = $n2.text+"-"+$n1.text;}
+            |   ARRAY '['n1=NUM'..'n2=NUM']' OF BOOLEAN                     {$value = "bool "; $n = $n2.text+"-"+$n1.text;}
             ;
 
 procedure   : 
             ;
 
-start   : BEGIN (stmt)+ ENDP
+start   : BEGIN {tr+="\nint main()"+open+"\n";}(stmt)+ ENDP{tr+="return 0;\n"+close;} {System.out.println(tr);}
         | (stmt)+ 
         ;
 
@@ -40,11 +49,10 @@ stmt    : write EOL             #stmtPrint
         | cond                  #stmtCond
         ;
 
-cond    : IF '('condExpr')' THEN  b1=block  END  EOL              #ifStmt
-        | IF '('condExpr')' THEN  b1=block ELSE b2=block END EOL  #ifElseStmt
-        | WHILE '('condExpr')' DO BEGIN b1=block END EOL   #whileStmt
-        | FOR attr TO n=NUM DO BEGIN b1=block END EOL #forStmt
-        | FOR n=NUM TO m=NUM DO BEGIN b1=block END EOL #forStmt2
+cond    : IF '('condExpr')' THEN {tr+="if("+$condExpr.text+")"+open+"\n";}   b1=block  END {tr+=close+"\n";} EOL             #ifStmt
+        | IF '('condExpr')' THEN {tr+="if("+$condExpr.text+")"+open+"\n";}   b1=block {tr+=close;} ELSE {tr+="else"+open+"\n";}b2=block END {tr+=close+"\n";} EOL  #ifElseStmt
+        | WHILE '('condExpr')' DO BEGIN{tr+="while("+$condExpr.text+")"+open+"\n";} b1=block END {tr+=close+"\n";} EOL   #whileStmt
+        | FOR attr TO n=NUM DO BEGIN {String at = $attr.text; at= at.replace(":","");tr+="for("+at+";"+$attr.nome+"<"+$n.text+";"+$attr.nome+"++)"+open+"\n";} b1=block END {tr+=close+"\n";} EOL #forStmt
         ;
 
 
@@ -55,18 +63,18 @@ condExpr: expr                                              #condExpresion
 block   : start     #blockStmt
         ;
 
-write   : WRITE STR         #printStr
-        | WRITE expr        #printExpr
-        | WRITELN STR       #printStrLn
-        | WRITELN expr      #printExprLn
+write   : WRITE STR {tr+="cout <<"+ $STR.text+";\n";}        #printStr
+        | WRITE expr  {tr+="cout <<"+$expr.text+";\n";}      #printExpr
+        | WRITELN STR   {tr+="cout <<"+$STR.text+"endl;\n";}    #printStrLn
+        | WRITELN expr    {tr+="cout <<"+$expr.text+"endl;\n";}  #printExprLn
         ;
 
-readln    : READLN VARNAME          #readVar
+readln    : READLN VARNAME {tr+="cin >> "+$VARNAME.text+";\n";}          #readVar
         ;
 
-attr    : VARNAME ':=' expr         #attrExpr
-        | VARNAME ':=' STR       #attrString  
-        | VARNAME ':=' truefalse #attrBool
+attr    returns [String nome]: VARNAME ':=' expr {tr+=$VARNAME.text+" = "+$expr.text+";\n"; $nome=$VARNAME.text;}         #attrExpr
+        | VARNAME ':=' STR  {tr+=$VARNAME.text+" = "+$STR.text+";\n"; $nome=$VARNAME.text;}     #attrString  
+        | VARNAME ':=' truefalse {tr+=$VARNAME.text+" = "+$truefalse.text+";\n"; $nome=$VARNAME.text;} #attrBool
         ;
 
 truefalse: TRUE | FALSE;
@@ -81,8 +89,8 @@ expr1   : expr2 '*' expr    #expr1Mult
         | expr2             #expr2Empty
         ;
 
-expr2   : '(' expr ')'      #expr2Par
-        | NUM               #expr2Num
+expr2   : '(' expr ')'     #expr2Par
+        | NUM              #expr2Num
         | VARNAME               #expr2Var
         ;
 

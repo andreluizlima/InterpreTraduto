@@ -1,4 +1,4 @@
-// Generated from /home/andre/Área de Trabalho/Trabalho/InterpreTraduto/grammar/basicintast/parser/Pascalzinho.g4 by ANTLR 4.6
+// Generated from C:\Users\junin\Documents\InterpreTraduto\grammar\basicintast\parser\Pascalzinho.g4 by ANTLR 4.6
 
 package basicintast.parser;
 import basicintast.util.*;
@@ -141,13 +141,6 @@ public interface PascalzinhoVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitForStmt(PascalzinhoParser.ForStmtContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code forStmt2}
-	 * labeled alternative in {@link PascalzinhoParser#cond}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitForStmt2(PascalzinhoParser.ForStmt2Context ctx);
 	/**
 	 * Visit a parse tree produced by the {@code condExpresion}
 	 * labeled alternative in {@link PascalzinhoParser#condExpr}.

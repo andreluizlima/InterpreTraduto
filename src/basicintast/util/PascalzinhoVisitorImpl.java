@@ -367,15 +367,5 @@ public class PascalzinhoVisitorImpl extends PascalzinhoBaseVisitor<Object> {
         return null;
     }
 
-    @Override
-    public Object visitForStmt2(PascalzinhoParser.ForStmt2Context ctx) {
-        int n = Integer.parseInt((String) ctx.n.getText());
-        int max = Integer.parseInt((String) ctx.m.getText());
-        //System.out.println("N: "+n+" Max:"+max);
-        for (int i = n; n < max; n++) {
-            visit(ctx.b1);
-        }
-        return null;
-    }
 
 }

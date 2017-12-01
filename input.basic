@@ -4,59 +4,24 @@ var
     i: integer;
     nome: string;
     aprovado: boolean;
+    a: array [2..4] of integer;
 
 begin
-i:="ls";
-write nome;
+if(1==1)then
+    write "sa";
+    i:=1;
+else
+    write "as";
+end;
+a[0]:=10;
+while(i<=2) do
+begin
+    i:=i+1;
+end;
+i:=3*5;
 for i:=0 to 4 do
 begin
     write "FOR 1";
-end;
-
-i:=0;
-while(i<10) do
-begin
-    write "Repetindo ";
-    write i;
-    i:= i+1;        
-end;
-
-
-writeln "";
-writeln "Calculadora da média!!";
-
-write "Nota 1: ";
-readln n1;
-write "Nota 2: ";
-readln n2;
-write "Nota 3: ";
-readln n3;
-write "Nota 4: ";
-readln n4;
-
-media := (n1+n2+n3+n4)/4;
-writeln media;
-
-if(media >= 7) then
-    writeln "";
-    aprovado := true;    
-else
-    aprovado := false;
-    if(media>=4) then
-     if(media>=5) then
-            aprovado := true;
-        end;   write "Nota Exame: ";
-        readln exame;
-        media := (media + exame)/2;
-        if(media>=5) then
-            aprovado := true;
-        end;
-    end;
-end;
-if (aprovado) then
-    writeln "Aprovado";
-else
-    writeln "Reprovado";
 end;
 
 

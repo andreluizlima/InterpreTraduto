@@ -1,4 +1,4 @@
-// Generated from /home/andre/Área de Trabalho/Trabalho/InterpreTraduto/grammar/basicintast/parser/Pascalzinho.g4 by ANTLR 4.6
+// Generated from C:\Users\junin\Documents\InterpreTraduto\grammar\basicintast\parser\Pascalzinho.g4 by ANTLR 4.6
 
 package basicintast.parser;
 import basicintast.util.*;
@@ -88,6 +88,12 @@ public class PascalzinhoLexer extends Lexer {
 	public Vocabulary getVocabulary() {
 		return VOCABULARY;
 	}
+
+
+	String tr ="";
+	String aux="";
+	char open=123;
+	char close=125;     
 
 
 	public PascalzinhoLexer(CharStream input) {
