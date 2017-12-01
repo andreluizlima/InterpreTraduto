@@ -226,6 +226,27 @@ public interface PascalzinhoVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAttrBool(PascalzinhoParser.AttrBoolContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code attrArrExpr}
+	 * labeled alternative in {@link PascalzinhoParser#attr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAttrArrExpr(PascalzinhoParser.AttrArrExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code attrArrStr}
+	 * labeled alternative in {@link PascalzinhoParser#attr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAttrArrStr(PascalzinhoParser.AttrArrStrContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code attrArrTrueFalse}
+	 * labeled alternative in {@link PascalzinhoParser#attr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAttrArrTrueFalse(PascalzinhoParser.AttrArrTrueFalseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link PascalzinhoParser#truefalse}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -294,4 +315,11 @@ public interface PascalzinhoVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitExpr2Var(PascalzinhoParser.Expr2VarContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code exprArr}
+	 * labeled alternative in {@link PascalzinhoParser#expr2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExprArr(PascalzinhoParser.ExprArrContext ctx);
 }

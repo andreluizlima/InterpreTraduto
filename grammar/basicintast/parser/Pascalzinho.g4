@@ -4,8 +4,7 @@ grammar Pascalzinho;
 package basicintast.parser;
 import basicintast.util.*;
 }
-
-program : PROGRAM STR EOL var? procedure?        #programStmtBegin
+program : p=PROGRAM STR EOL var? procedure*           #programStmtBegin
         | PROGRAM STR EOL start                       #programStmt
         ;
 var     : VAR var2;
@@ -15,18 +14,18 @@ varn : ',' VARNAME #varName;
 
 type    : INT
         | FLOAT
-        | BOOLEAN
+        | BOOLEAN 
         | STRING
         | arraytype
         ;
 
-arraytype   :   ARRAY '['n1=NUM'..'n2=NUM']' OF INT
-            |   ARRAY '['n1=NUM'..'n2=NUM']' OF FLOAT
-            |   ARRAY '['n1=NUM'..'n2=NUM']' OF STRING
-            |   ARRAY '['n1=NUM'..'n2=NUM']' OF BOOLEAN
+arraytype   :   ARRAY '['n1=NUM'..'n2=NUM']' OF t=INT
+            |   ARRAY '['n1=NUM'..'n2=NUM']' OF t=FLOAT
+            |   ARRAY '['n1=NUM'..'n2=NUM']' OF t=STRING
+            |   ARRAY '['n1=NUM'..'n2=NUM']' OF t=BOOLEAN
             ;
 
-procedure   : 
+procedure   : PROCEDURE VARNAME '('')' EOL start END
             ;
 
 start   : BEGIN (stmt)+ ENDP
@@ -64,9 +63,12 @@ write   : WRITE STR         #printStr
 readln    : READLN VARNAME          #readVar
         ;
 
-attr    : VARNAME ':=' expr         #attrExpr
-        | VARNAME ':=' STR       #attrString  
-        | VARNAME ':=' truefalse #attrBool
+attr    : VARNAME ':=' expr             #attrExpr
+        | VARNAME ':=' STR              #attrString  
+        | VARNAME ':=' truefalse        #attrBool
+        | VARNAME '['v=(NUM|VARNAME)']'':='expr     #attrArrExpr
+        | VARNAME '['v=(NUM|VARNAME)']'':='STR     #attrArrStr
+        | VARNAME '['v=(NUM|VARNAME)']'':='truefalse     #attrArrTrueFalse
         ;
 
 truefalse: TRUE | FALSE;
@@ -84,6 +86,7 @@ expr1   : expr2 '*' expr    #expr1Mult
 expr2   : '(' expr ')'      #expr2Par
         | NUM               #expr2Num
         | VARNAME               #expr2Var
+        | VARNAME '['v=(NUM|VARNAME)']' #exprArr
         ;
 
 fragment A:('a'|'A');
@@ -160,3 +163,5 @@ NUM     : [0-9]+('.'[0-9])* ;
 VARNAME     : [a-zA-Z][a-zA-Z0-9_]*;
 STR     : '"' ('\\' ["\\] | ~["\\\r\n])* '"';
 WS      : [\n\r \t]+ -> skip;
+
+//('['([0-9]+|([a-zA-Z][a-zA-Z0-9_]*))']')?
