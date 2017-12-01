@@ -113,11 +113,13 @@ public class PascalzinhoVisitorImpl extends PascalzinhoBaseVisitor<Object> {
                 case "integer":
                     value = s.next();
                     try {
-                        Integer.parseInt((String) value);
-                        SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, value);
+                        int i = (int) Double.parseDouble(value.toString());
+                        String v = i + "";
+                        SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, v);
                     } catch (Exception a) {
                         System.out.println("Tipo incompatível!");
-                        break;
+                        System.exit(0);
+                        return null;
                     }
                     break;
                 case "float":
@@ -127,7 +129,8 @@ public class PascalzinhoVisitorImpl extends PascalzinhoBaseVisitor<Object> {
                         SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, value);
                     } catch (Exception a) {
                         System.out.println("Tipo incompatível!");
-                        break;
+                        System.exit(0);
+                        return null;
                     }
                     break;
                 default:
@@ -135,10 +138,6 @@ public class PascalzinhoVisitorImpl extends PascalzinhoBaseVisitor<Object> {
                     break;
             }
 
-            /////////////////
-            //System.out.println("valor: " + value + "tipo: " + type);
-            /////////////////
-            //SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, value);
             return value;
         }
         System.out.println("Variável não declarada!");
@@ -155,12 +154,12 @@ public class PascalzinhoVisitorImpl extends PascalzinhoBaseVisitor<Object> {
                 case "integer":
                     try {
                         int i = (int) Double.parseDouble(value.toString());
-                        SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, value);
+                        String v = i + "";
+                        SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, v);
                     } catch (Exception a) {
-
-                        System.out.println(a);
                         System.out.println("Tipo incompatível!");
-                        break;
+                        System.exit(0);
+                        return null;
                     }
                     break;
                 case "float":
@@ -169,14 +168,97 @@ public class PascalzinhoVisitorImpl extends PascalzinhoBaseVisitor<Object> {
                         SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, value);
                     } catch (Exception a) {
                         System.out.println("Tipo incompatível!");
-                        break;
+                        System.exit(0);
+                        return null;
                     }
                     break;
                 default:
-                    SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, value);
-                    break;
+                    System.out.println("Tipo incompatível!");
+                    System.exit(0);
+                    return null;
             }
-            // SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, value);
+            return visitChildren(ctx);
+        }
+        System.out.println("Variável não declarada!");
+        return null;
+    }
+
+    @Override
+    public Object visitAttrArrExpr(PascalzinhoParser.AttrArrExprContext ctx) {
+        int teste;
+        try {
+            teste = Integer.parseInt(ctx.v.getText());
+        } catch (Exception e) {
+            teste = Integer.parseInt("" + SymbolsTable.getInstance().getValue(ctx.v.getText()));
+        }
+        if ((SymbolsTable.getInstance().getSymbol(ctx.VARNAME(0).getText() + "[" + teste + "]")) != null) {
+
+            Object value = (Object) visit(ctx.expr());
+            try {
+                int i = Integer.parseInt(ctx.v.getText());
+                String type = SymbolsTable.getInstance().getType(ctx.VARNAME(0).getText() + "[" + i + "]");
+
+                switch (type) {
+                    case "integer":
+                        try {
+                            int n = (int) Double.parseDouble(value.toString());
+                            String v = n + "";
+                            SymbolsTable.getInstance().addSymbol(ctx.VARNAME(0).getText() + "[" + i + "]", type, v);
+                        } catch (Exception a) {
+                            System.out.println("Tipo incompatível!");
+                            System.exit(0);
+                            return null;
+                        }
+                        break;
+                    case "float":
+                        try {
+                            double d = Double.parseDouble((String) value);
+                            SymbolsTable.getInstance().addSymbol(ctx.VARNAME(0).getText() + "[" + i + "]", type, d);
+                        } catch (Exception a) {
+                            System.out.println("Tipo incompatível!");
+                            System.exit(0);
+                            return null;
+                        }
+                        break;
+                    default:
+                        System.out.println("Tipo incompatível!");
+                        System.exit(0);
+                        return null;
+                }
+            } catch (Exception e) {
+
+                String a = SymbolsTable.getInstance().getValue(ctx.v.getText()) + "";
+                int i = Integer.parseInt(a.toString());
+                String type = SymbolsTable.getInstance().getType(ctx.VARNAME(0).getText() + "[" + i + "]");
+                switch (type) {
+                    case "integer":
+                        try {
+                            int n = (int) Double.parseDouble(value.toString());
+                            String v = n + "";
+                            SymbolsTable.getInstance().addSymbol(ctx.VARNAME(0).getText() + "[" + i + "]", type, v);
+                        } catch (Exception b) {
+                            System.out.println("Tipo incompatível!");
+                            System.exit(0);
+                            return null;
+                        }
+                        break;
+                    case "float":
+                        try {
+                            double d = Double.parseDouble((String) value);
+                            SymbolsTable.getInstance().addSymbol(ctx.VARNAME(0).getText() + "[" + i + "]", type, d);
+                        } catch (Exception b) {
+                            System.out.println("Tipo incompatível!");
+                            System.exit(0);
+                            return null;
+                        }
+                        break;
+                    default:
+                        System.out.println("Tipo incompatível!");
+                        System.exit(0);
+                        return null;
+                }
+            }
+
             return value;
         }
         System.out.println("Variável não declarada!");
@@ -187,40 +269,105 @@ public class PascalzinhoVisitorImpl extends PascalzinhoBaseVisitor<Object> {
     public Object visitAttrBool(PascalzinhoParser.AttrBoolContext ctx) {
         String type = SymbolsTable.getInstance().getType(ctx.VARNAME().getText());
         Object value = ctx.getChild(2).getText();
-        if (value.equals("true")) {
-            SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, "1.0");
+        if (type.equals("boolean")) {
+            if (value.equals("true")) {
+                SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, "1.0");
+            } else {
+                SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, "0.0");
+            }
+            return visitChildren(ctx);
+
         } else {
-            SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, "0.0");
+            System.out.println("Tipo incompatível!");
+            System.exit(0);
+            return null;
         }
-        return visitChildren(ctx);
+    }
+
+    @Override
+    public Object visitAttrArrTrueFalse(PascalzinhoParser.AttrArrTrueFalseContext ctx) {
+        int teste;
+        try {
+            teste = Integer.parseInt(ctx.v.getText());
+        } catch (Exception e) {
+            teste = Integer.parseInt("" + SymbolsTable.getInstance().getValue(ctx.v.getText()));
+        }
+        if ((SymbolsTable.getInstance().getSymbol(ctx.VARNAME(0).getText() + "[" + teste + "]")) != null) {
+            String type = SymbolsTable.getInstance().getType(ctx.VARNAME(0).getText() + "[" + teste + "]");
+            Object value = ctx.getChild(5).getText();
+            if (type.equals("boolean")) {
+                if (value.equals("true")) {
+                    SymbolsTable.getInstance().addSymbol(ctx.VARNAME(0).getText() + "[" + teste + "]", type, "1.0");
+                } else {
+                    SymbolsTable.getInstance().addSymbol(ctx.VARNAME(0).getText() + "[" + teste + "]", type, "0.0");
+                }
+            } else {
+                System.out.println("Tipo incompatível!");
+                System.exit(0);
+                return null;
+            }
+
+            return visitChildren(ctx);
+        }
+        System.out.println("Variável não declarada!");
+        return null;
+
     }
 
     @Override
     public Object visitAttrString(PascalzinhoParser.AttrStringContext ctx) {
-
         Object value = ctx.STR().getText();
         String type = SymbolsTable.getInstance().getType(ctx.VARNAME().getText());
-        String v = value.toString();
-        if (v.charAt(0) == '"' && !type.equals("string")) {
-            System.out.println("Tipo incompatível!");
-            return null;
-        } else {
-            
-            SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, value);
-            return value;
+        if ((SymbolsTable.getInstance().getSymbol(ctx.VARNAME().getText())) != null) {
+            if (!type.equals("string")) {
+                System.out.println("Tipo incompatível!");
+                System.exit(0);
+                return null;
+            } else {
+
+                SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, value);
+                return value;
+            }
         }
+        System.out.println("Variavel não declarada!");
+        return null;
+    }
+
+    @Override
+    public Object visitAttrArrStr(PascalzinhoParser.AttrArrStrContext ctx) {
+        int teste;
+        try {
+            teste = Integer.parseInt(ctx.v.getText());
+        } catch (Exception e) {
+            teste = Integer.parseInt("" + SymbolsTable.getInstance().getValue(ctx.v.getText()));
+        }
+        if ((SymbolsTable.getInstance().getSymbol(ctx.VARNAME(0).getText() + "[" + teste + "]")) != null) {
+
+            Object value = ctx.STR().getText();
+            String type = SymbolsTable.getInstance().getType(ctx.VARNAME(0).getText() + "[" + teste + "]");
+            String v = value.toString();
+            if (v.charAt(0) == '"' && !type.equals("string")) {
+                System.out.println("Tipo incompatível!");
+                System.exit(0);
+                return null;
+            } else {
+                SymbolsTable.getInstance().addSymbol(ctx.VARNAME(0).getText() + "[" + teste + "]", type, value);
+                return value;
+            }
+        }
+        System.out.println("Variável não declarada!");
+        return null;
 
     }
 
     @Override
     public Object visitExprPlus(PascalzinhoParser.ExprPlusContext ctx) {
         try {
-            Double a = Double.parseDouble((String) visit(ctx.expr1()));
-            Double b = Double.parseDouble((String) visit(ctx.expr()));
+            Double a = Double.parseDouble("" + visit(ctx.expr1()));
+            Double b = Double.parseDouble("" + visit(ctx.expr()));
             Double result = a + b;
             return result.toString();
         } catch (Exception a) {
-            System.out.println(a);
             System.out.println("Impossível calcular!");
         }
         return null;
@@ -230,8 +377,8 @@ public class PascalzinhoVisitorImpl extends PascalzinhoBaseVisitor<Object> {
     @Override
     public Object visitExprMinus(PascalzinhoParser.ExprMinusContext ctx) {
         try {
-            Double a = Double.parseDouble((String) visit(ctx.expr1()));
-            Double b = Double.parseDouble((String) visit(ctx.expr()));
+            Double a = Double.parseDouble("" + visit(ctx.expr1()));
+            Double b = Double.parseDouble("" + visit(ctx.expr()));
             Double result = a - b;
             return result.toString();
 
@@ -252,12 +399,11 @@ public class PascalzinhoVisitorImpl extends PascalzinhoBaseVisitor<Object> {
         try {
             Object a = visit(ctx.expr2());
             Object b = visit(ctx.expr());
-            Double aa = Double.parseDouble((String) a);
-            Double bb = Double.parseDouble((String) b);
+            Double aa = Double.parseDouble("" + a);
+            Double bb = Double.parseDouble("" + b);
             Double result = aa * bb;
             return result.toString();
         } catch (Exception a) {
-            System.out.println(a);
             System.out.println("Impossível calcular!");
         }
         return null;
@@ -269,8 +415,8 @@ public class PascalzinhoVisitorImpl extends PascalzinhoBaseVisitor<Object> {
         try {
             Object a = visit(ctx.expr2());
             Object b = visit(ctx.expr());
-            Double aa = Double.parseDouble((String) a);
-            Double bb = Double.parseDouble((String) b);
+            Double aa = Double.parseDouble("" + a);
+            Double bb = Double.parseDouble("" + b);
             Double result = aa / bb;
             return result.toString();
         } catch (Exception a) {
@@ -296,6 +442,20 @@ public class PascalzinhoVisitorImpl extends PascalzinhoBaseVisitor<Object> {
     }
 
     @Override
+    public Object visitExprArr(PascalzinhoParser.ExprArrContext ctx) {
+        String r = "";
+        try {
+            int v = Integer.parseInt(ctx.v.getText());
+            r = "" + SymbolsTable.getInstance().getValue(ctx.VARNAME(0).getText() + "[" + v + "]");
+        } catch (Exception e) {
+            String a = SymbolsTable.getInstance().getValue(ctx.v.getText()) + "";
+            int v = Integer.parseInt(a.toString());
+            r = "" + SymbolsTable.getInstance().getValue(ctx.VARNAME(0).getText() + "[" + v + "]");
+        }
+        return r;
+    }
+
+    @Override
     public Object visitExpr2Var(PascalzinhoParser.Expr2VarContext ctx) {
         return SymbolsTable.getInstance().getValue(ctx.VARNAME().getText());
     }
@@ -303,8 +463,16 @@ public class PascalzinhoVisitorImpl extends PascalzinhoBaseVisitor<Object> {
     @Override
     public Object visitVarNameFirst(PascalzinhoParser.VarNameFirstContext ctx) {
         String type = ctx.type().getText();
-        //System.out.println("tipo: " + type);
-        SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, null);
+        if (type.charAt(0) == 'a') {
+            int a = Integer.parseInt(ctx.type().arraytype().n1.getText());
+            int b = Integer.parseInt(ctx.type().arraytype().n2.getText());
+            for (int i = a; i < b; i++) {
+                SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText() + "[" + i + "]", ctx.type().arraytype().t.getText(), null);
+            }
+
+        } else {
+            SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, null);
+        }
 
         return visitChildren(ctx);
     }
@@ -334,7 +502,6 @@ public class PascalzinhoVisitorImpl extends PascalzinhoBaseVisitor<Object> {
                     break;
             }
         }
-        //System.out.println("tipo: " + type);
         SymbolsTable.getInstance().addSymbol(ctx.VARNAME().getText(), type, null);
 
         return visitChildren(ctx);
@@ -357,15 +524,26 @@ public class PascalzinhoVisitorImpl extends PascalzinhoBaseVisitor<Object> {
         String varname = ctx.attr().getChild(0).getText();
         String type = SymbolsTable.getInstance().getType(varname);
         visit(ctx.attr());
-        int n = Integer.parseInt((String) SymbolsTable.getInstance().getValue(varname));
-        int max = Integer.parseInt((String) ctx.n.getText());
-        //System.out.println("N: "+n+" Max:"+max);
+        int n = Integer.parseInt("" + SymbolsTable.getInstance().getValue(varname));
+        int max = Integer.parseInt("" + ctx.n.getText());
         for (int i = n; n < max; n++) {
-            visit(ctx.b1);
             SymbolsTable.getInstance().addSymbol(varname, type, n);
+            visit(ctx.b1);
         }
         return null;
     }
 
+<<<<<<< HEAD
+=======
+    @Override
+    public Object visitForStmt2(PascalzinhoParser.ForStmt2Context ctx) {
+        int n = Integer.parseInt((String) ctx.n.getText());
+        int max = Integer.parseInt((String) ctx.m.getText());
+        for (int i = n; n < max; n++) {
+            visit(ctx.b1);
+        }
+        return null;
+    }
+>>>>>>> 6861c651356b9845b894d31f9f8df80622583a27
 
 }

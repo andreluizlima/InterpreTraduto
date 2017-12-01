@@ -4,6 +4,7 @@ var
     i: integer;
     nome: string;
     aprovado: boolean;
+<<<<<<< HEAD
     a: array [2..4] of integer;
 
 begin
@@ -22,6 +23,63 @@ i:=3*5;
 for i:=0 to 4 do
 begin
     write "FOR 1";
+=======
+    a: array [0..10] of integer;
+
+begin
+for i:=0 to 10 do
+begin
+    a[i] := i;
+    write a[i];    
+    write " ";
+end;
+writeln "";
+
+i:=0;
+while(i<10) do
+begin
+    write i;
+    i:= i+1;
+    write " ";
+end;
+
+writeln "";
+writeln "Calculadora da média!!";
+
+write "Nota 1: ";
+readln n1;
+write "Nota 2: ";
+readln n2;
+write "Nota 3: ";
+readln n3;
+write "Nota 4: ";
+readln n4;
+
+media := (n1+n2+n3+n4)/4;
+writeln media;
+
+if(media >= 7) then
+    writeln "";
+    aprovado := true;    
+else
+    aprovado := false;
+    if(media>=4) then
+        write "Nota Exame: ";
+        readln exame;
+        media := (media + exame)/2;
+        if(media>=5) then
+            aprovado := true;
+        end;
+    end;
+end;
+write "Nota Final: ";
+writeln media;
+
+if (aprovado) then
+    writeln "Aprovado";
+else
+    writeln "Reprovado";
+>>>>>>> 6861c651356b9845b894d31f9f8df80622583a27
 end;
 
 
